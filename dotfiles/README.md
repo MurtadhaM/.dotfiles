@@ -23,5 +23,3 @@ You can also use `bin/setup-darwin` for initial environment setup on OSX.
 ## License
 
 This repository is MIT-licensed. You are awesome.
-# .dotfiles
-# .dotfiles

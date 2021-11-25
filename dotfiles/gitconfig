@@ -1,0 +1,42 @@
+[user]
+	name = Adam Stankiewicz
+	email = sheerun@sher.pl
+	# signingKey = 6A0698348D01387B9A8AF76E166ECF59BA8831B7
+
+# [commit]
+# 	gpgsign = true
+
+[core]
+	whitespace = warn,space-before-tab,trailing-space
+	excludesfile = /Users/m/.gitignore
+	pager = less -x3,2
+
+[alias]
+	st = status -sb
+	ci = commit
+	br = branch -vv
+	co = checkout
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	cp = cherry-pick
+
+[color]
+	ui = true
+
+[push]
+	default = current
+	followTags = true
+
+[rerere]
+	enabled = true
+
+[url "git@github.com:"]
+	pushInsteadOf = "git://github.com/"
+	pushInsteadOf = "https://github.com/"
+
+[url "ssh://git@heroku.com/"]
+	insteadOf = https://git.heroku.com/
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

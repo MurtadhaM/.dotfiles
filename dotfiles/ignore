@@ -1,0 +1,34 @@
+# Ruby development
+zeus.json
+.rbenv-version
+/config/database.yml
+.ruby-version
+.rbenv-version
+
+# Node development
+node_modules/
+bower_components/
+DefinitelyTyped/
+
+# Sass files
+*.scssc
+
+# CTags files
+*tags
+GPATH
+GTAGS
+GRTAGS
+
+# Go development
+deps
+Godeps
+
+# Other directories
+log/
+tmp/
+vendor/
+releases/
+
+# Other files
+npm-debug.json
+*.log
