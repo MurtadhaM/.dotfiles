@@ -1,13 +1,10 @@
-# My lovely dotfiles [![Build Status](https://secure.travis-ci.org/sheerun/dotfiles.png?branch=master)](http://travis-ci.org/sheerun/dotfiles)
-
-## Installation
-
+# My lovely dotfiles 
 These dotfiles are meant to be used with zsh.
 
 Please fork this repository and configure it for yourself:
 
 ```
-git clone https://github.com/sheerun/dotfiles.git ~/.dotfiles
+git clone https://github.com/MurtadhaM/dotfiles.git ~/.dotfiles
 ~/.dotfiles/bin/dotfiles install
 ```
 
