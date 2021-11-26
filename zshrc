@@ -69,7 +69,7 @@ ZSH_THEME="agnoster" # set by `omz`
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git alias-finder autojump  fzf    git npm zsh-autosuggestions zsh-completions zsh-syntax-highlighting  z  colorize grc macos command-not-found  vscode)
+plugins=(git alias-finder autojump  fzf    git npm zsh-autosuggestions zsh-completions zsh-syntax-highlighting  z  colorize grc macos command-not-found  vscode python)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -142,5 +142,7 @@ alias code='/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code
 alias code=/Applications/Visual\ Studio\ Code\ -\ Insiders.app/Contents/MacOS/Electron
 alias code=/Applications/Visual\ Studio\ Code\ -\ Insiders.app/Contents/MacOS/Electron
 alias code=/Applications/'Visual\ Studio\ Code\ -\ Insiders.app'/Contents/MacOS/Electron
-plugins=(you-should-use you-should-use git alias-finder autojump fzf git npm zsh-autosuggestions zsh-completions zsh-syntax-highlighting z colorize grc macos command-not-found vscode)
+plugins=(you-should-use you-should-use git alias-finder autojump fzf git npm zsh-autosuggestions zsh-completions zsh-syntax-highlighting z colorize grc macos command-not-found vscode python )
 source /Users/m/.oh-my-zsh/oh-my-zsh.sh
+alias usage='du -h -d1'
+alias net='lsof -i '
