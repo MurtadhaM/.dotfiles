@@ -107,60 +107,10 @@ defaults write com.apple.finder WarnOnEmptyTrash -bool false
 # Show the ~/Library folder
 chflags nohidden ~/Library
 
-# Remove the auto-hiding Dock delay
-defaults write com.apple.Dock autohide-delay -float 0
-# Remove the animation when hiding/showing the Dock
-defaults write com.apple.dock autohide-time-modifier -float 0
-
-# Disable shadow in screenshots
-defaults write com.apple.screencapture disable-shadow -bool true
-
-# Disable send and reply animations in Mail.app
-defaults write com.apple.mail DisableReplyAnimations -bool true
-defaults write com.apple.mail DisableSendAnimations -bool true
-
-# Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app
-defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
-
-# Add the keyboard shortcut ⌘ + Enter to send an email in Mail.app
-defaults write com.apple.mail NSUserKeyEquivalents -dict-add "Send" "@\U21a9"
-
-# Display emails in threaded mode, sorted by date (oldest at the top)
-defaults write com.apple.mail DraftsViewerAttributes -dict-add "DisplayInThreadedMode" -string "yes"
-defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortedDescending" -string "yes"
-defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortOrder" -string "received-date"
-
-# Disable inline attachments (just show the icons)
-defaults write com.apple.mail DisableInlineAttachmentViewing -bool true
-
-# Disable local Time Machine backups
-hash tmutil &> /dev/null && sudo tmutil disablelocal
-
-# Disable smart quotes as they’re annoying when typing code
-defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
-
-# Disable smart dashes as they’re annoying when typing code
-defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
-
-
 ###############################################################################
 # Spotlight                                                                   #
 ###############################################################################
 
-# Hide Spotlight tray-icon (and subsequent helper)
-#sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
-# Disable Spotlight indexing for any volume that gets mounted and has not yet
-# been indexed before.
-# Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume.
-sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
-# Change indexing order and disable some search results
-# Yosemite-specific search results (remove them if you are using macOS 10.9 or older):
-#   MENU_DEFINITION
-#   MENU_CONVERSION
-#   MENU_EXPRESSION
-#   MENU_SPOTLIGHT_SUGGESTIONS (send search queries to Apple)
-#   MENU_WEBSEARCH             (send search queries to Apple)
-#   MENU_OTHER
 defaults write com.apple.spotlight orderedItems -array \
     '{"enabled" = 1;"name" = "APPLICATIONS";}' \
     '{"enabled" = 1;"name" = "SYSTEM_PREFS";}' \
@@ -230,9 +180,6 @@ ppids() { echo $1; ppid=$(ps -o ppid= $1) && ppids ${ppid// /} || true; }
 if ! ppids $$ | xargs ps | grep Terminal > /dev/null; then
 open -a Terminal $DOTDIR/bin/bootstrap && exit 0
 fi
-
-# echo "Closing iTerm..."
-# killall iTerm || true
 
 sudo -v
 
@@ -314,10 +261,6 @@ defaults write com.apple.frameworks.diskimages skip-verify -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
 
-echo Automatically open a new Finder window when a volume is mounted
-defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
-defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
-defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 
 echo Use list view in all Finder windows by default
 echo Four-letter codes for the other view modes: icnv, clmv, Flwv
@@ -329,11 +272,7 @@ defaults write com.apple.finder WarnOnEmptyTrash -bool false
 echo Show the ~/Library folder
 chflags nohidden ~/Library
 
-echo Put Dock on the left
-defaults write com.apple.dock orientation -string left
 
-echo Minimize to app icon
-defaults write com.apple.dock minimize-to-application -bool true
 
 echo Restarting Finder
 killall Finder
@@ -360,44 +299,8 @@ clear_dock() {
 defaults write com.apple.dock persistent-apps -array ''
 }
 
-permament_dock() {
-defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>$1</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
-}
 
-allow_control() {
-APP_ID="$(osascript -e "id of app \"$1\"")"
 
-if [[ -n "$APP_ID" ]]; then
-sudo sqlite3 /Library/Application\ Support/com.apple.TCC/TCC.db "INSERT or REPLACE INTO access values ('kTCCServiceAccessibility', '$APP_ID', 0, 1, 0, NULL);"
-fi
-}
-
-echo "Switching option and command keys..."
-osascript -e 'tell application "System Preferences"
-reveal anchor "keyboardTab" of pane "com.apple.preference.keyboard"
-end tell
-tell application "System Events" to tell window 1 of process "System Preferences"
-click button 1 of tab group 1
-tell sheet 1
-click pop up button 1
-click menu item 3 of menu 1 of pop up button 1
-
-click pop up button 2
-click menu item 4 of menu 1 of pop up button 2
-
-click button "OK"
-end tell
-end tell
-tell application "System Events"
-tell application "System Preferences"
-reveal anchor "keyboardTab" of pane "com.apple.preference.keyboard"
-end tell
-set theCheckbox to checkbox 1 of tab group 1 of window 1 of application process "System Preferences"
-tell theCheckbox
-if not (its value as boolean) then click theCheckbox
-end tell
-end tell
-quit application "System Preferences"'
 
 # Disable dashboard to free F12 shortcut
 defaults write com.apple.dashboard mcx-disabled -boolean true
