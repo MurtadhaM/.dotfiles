@@ -1,5 +1,0 @@
-set editing-mode emacs
-
-Control-a: beginning-of-line
-Control-e: end-of-line
-Control-k: kill-line

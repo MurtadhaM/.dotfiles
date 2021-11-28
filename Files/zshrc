@@ -69,7 +69,7 @@ ZSH_THEME="agnoster" # set by `omz`
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git alias-finder autojump  fzf    git npm zsh-autosuggestions zsh-completions zsh-syntax-highlighting  z  colorize grc macos command-not-found  vscode python)
+plugins=(git alias-finder autojump  fzf    git npm zsh-autosuggestions zsh-completions zsh-syntax-highlighting  z  colorize grc macos command-not-found  vscode python autoenv zsh-autosuggestions extract)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -142,7 +142,33 @@ alias code='/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code
 alias code=/Applications/Visual\ Studio\ Code\ -\ Insiders.app/Contents/MacOS/Electron
 alias code=/Applications/Visual\ Studio\ Code\ -\ Insiders.app/Contents/MacOS/Electron
 alias code=/Applications/'Visual\ Studio\ Code\ -\ Insiders.app'/Contents/MacOS/Electron
-plugins=(you-should-use you-should-use git alias-finder autojump fzf git npm zsh-autosuggestions zsh-completions zsh-syntax-highlighting z colorize grc macos command-not-found vscode python )
+plugins=(you-should-use you-should-use git alias-finder autojump fzf git npm zsh-autosuggestions zsh-completions zsh-syntax-highlighting z colorize grc macos command-not-found vscode python  autoenv extract)
 source /Users/m/.oh-my-zsh/oh-my-zsh.sh
 alias usage='du -h -d1'
 alias net='lsof -i '
+source ~/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh		
+#~/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+alias powershell='pwsh'
+function powerline_precmd() {
+    PS1="$($GOPATH/bin/powerline-go -error $? -jobs ${${(%):%j}:-0})"
+
+    # Uncomment the following line to automatically clear errors after showing
+    # them once. This not only clears the error for powerline-go, but also for
+    # everything else you run in that shell. Don't enable this if you're not
+    # sure this is what you want.
+
+    #set "?"
+}
+
+function install_powerline_precmd() {
+  for s in "${precmd_functions[@]}"; do
+    if [ "$s" = "powerline_precmd" ]; then
+      return
+    fi
+  done
+  precmd_functions+=(powerline_precmd)
+}
+
+if [ "$TERM" != "linux" ] && [ -f "$GOPATH/bin/powerline-go" ]; then
+    install_powerline_precmd
+fi
