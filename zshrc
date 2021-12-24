@@ -1,9 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # exsort PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/m/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
@@ -126,29 +123,18 @@ alias top="sudo htop"
 alias find="fd"
 # add support for ctrl+o to open selected file in VS Code
 export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(code {})+abort'"
-source /Users/m/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export PATH="/usr/local/opt/libressl/bin:$PATH"
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 export  PATH='/usr/local/opt/openssl@1.1/bin:/usr/local/opt/libressl/bin:/Users/m/.autojump/bin:/Users/m/.cargo/bin:./bin:/Users/m/.rbenv/shims:/Users/m/.rbenv/bin:/Users/m/.cabal/bin:/usr/local/heroku/bin:/Users/m/.bin:/bin:/usr/local/opt/llvm/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/share/npm/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/sbin:/usr/local/opt/fzf/bin:/Users/m/.pyenv/versions/3.11-dev/bin'
 export  PATH='/usr/local/opt/openssl@1.1/bin:/usr/local/opt/libressl/bin:/Users/m/.autojump/bin:/Users/m/.cargo/bin:./bin:/Users/m/.rbenv/shims:/Users/m/.rbenv/bin:/Users/m/.cabal/bin:/usr/local/heroku/bin:/Users/m/.bin:/bin:/usr/local/opt/llvm/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/share/npm/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/sbin:/usr/local/opt/fzf/bin:/Users/m/.pyenv/versions/3.11-dev/bin':/Users/m/.pyenv/versions/3.11-dev/bin
 
 #alias python3=python3.11	
-eval $(thefuck --alias)
-export FLASK_ENV=development
-export FLASK_APP=Travel_app.py
-alias powershell='/usr/local/microsoft/powershell/7/pwsh'
-export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-alias code='/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code'
-alias code=/Applications/Visual\ Studio\ Code\ -\ Insiders.app/Contents/MacOS/Electron
-alias code=/Applications/Visual\ Studio\ Code\ -\ Insiders.app/Contents/MacOS/Electron
-alias code=/Applications/'Visual\ Studio\ Code\ -\ Insiders.app'/Contents/MacOS/Electron
-plugins=(you-should-use you-should-use git alias-finder autojump fzf git npm zsh-autosuggestions zsh-completions zsh-syntax-highlighting z colorize grc macos command-not-found vscode python  autoenv extract)
-source /Users/m/.oh-my-zsh/oh-my-zsh.sh
-alias usage='du -h -d1'
-alias net='lsof -i '
-source ~/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh		
+plugins=(you-should-use you-should-use git 
+alias-finder autojump fzf git npm zsh-autosuggestions zsh-completions zsh-syntax-highlighting z colorize 
+grc macos command-not-found vscode python autoenv extract) 
+
+~/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 #~/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-alias powershell='pwsh'
 function powerline_precmd() {
     PS1="$($GOPATH/bin/powerline-go -error $? -jobs ${${(%):%j}:-0})"
 
@@ -172,3 +158,4 @@ function install_powerline_precmd() {
 if [ "$TERM" != "linux" ] && [ -f "$GOPATH/bin/powerline-go" ]; then
     install_powerline_precmd
 fi
+alias DT_Delete=find ./ -name .DS_Store -depth -exec rm {} ;
