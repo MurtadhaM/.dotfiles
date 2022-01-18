@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
+
+#INSTALL PLIST EDITOR AND OTHER TOOLS
+#https://github.com/5T33Z0/Clover-Crate/tree/main/Utilities
 echo "Setting up Mac..."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/Settings_Mac_Configuration.sh)"
-curl https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/zshrc -o ~/.zshrc
+curl -fsSL https://cdn.jsdelivr.net/gh/daliansky/Hackintosh/Tools/macserial -o /tmp/macserial && chmod +x /tmp/macserial && sh -c /tmp/macserial | grep -w 'Model:\|Valid:\|Hardware UUID:\|ROM:\|MLB:\|Serial Number:' | sed '/ \- /d' | tr -d ' ' | sed $'s/Model:/SystemProductName:/g' | sed $'s/HardwareUUID:/SystemUUID:/g' | sed $'s/SerialNumber:/SystemSerialNumber:/g' | sed $'s/\:/\: /g'  ## 一键提取三码，自己试试就行了，别帖出来哈
 
+curl https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/zshrc -o ~/.zshrc
 # getting gitignore
 curl https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/gitignore -o ~/.gitignore
 # getting aliases 
