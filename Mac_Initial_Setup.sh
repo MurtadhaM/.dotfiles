@@ -7,6 +7,11 @@ echo "Setting up Mac..."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/Settings_Mac_Configuration.sh)"
 curl -fsSL https://cdn.jsdelivr.net/gh/daliansky/Hackintosh/Tools/macserial -o /tmp/macserial && chmod +x /tmp/macserial && sh -c /tmp/macserial | grep -w 'Model:\|Valid:\|Hardware UUID:\|ROM:\|MLB:\|Serial Number:' | sed '/ \- /d' | tr -d ' ' | sed $'s/Model:/SystemProductName:/g' | sed $'s/HardwareUUID:/SystemUUID:/g' | sed $'s/SerialNumber:/SystemSerialNumber:/g' | sed $'s/\:/\: /g'  ## 一键提取三码，自己试试就行了，别帖出来哈
 
+
+# TO IMPROVE COLORS:
+#https://github.com/martinlindhe/base16-iterm2
+#git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
+#https://github.com/chriskempson/base16-shell
 curl https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/zshrc -o ~/.zshrc
 # getting gitignore
 curl https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/gitignore -o ~/.gitignore
