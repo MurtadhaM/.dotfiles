@@ -160,3 +160,4 @@ if [ "$TERM" != "linux" ] && [ -f "$GOPATH/bin/powerline-go" ]; then
 fi
 alias DT_Delete=find ./ -name .DS_Store -depth -exec rm {} ;
 export PATH="/usr/bin:$PATH"
+alias OCR='cd ~/Documents/GitHub/JAVASCRIPT/OCR_Crack/; sudo node ~/Documents/GitHub/JAVASCRIPT/OCR_Crack/app.js'
