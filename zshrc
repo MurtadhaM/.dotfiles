@@ -1,3 +1,6 @@
+#USEFUL csv sql utility 
+#brew install textql
+# EXAMPLE textql -sql 'select * from file' file.csv
 # If you come from bash you might have to change your $PATH.
 # exsort PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
