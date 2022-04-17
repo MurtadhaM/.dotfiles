@@ -1,3 +1,6 @@
+# xlsx to CSV
+# pip install xlsx2csv
+
 #USEFUL csv sql utility 
 #brew install textql
 # EXAMPLE textql -sql 'select * from file' file.csv
