@@ -255,3 +255,4 @@ work='cd ~/dev/mitx'
 x=extract
 z='_z 2>&1'
 zshconfig='nano ~/.zshrc'alias GITALL=ls  | while read line; do echo  $($line &&  git add . && git commit -m "👹🐸" && git push ) ; done
+alias check_ip="curl http://icanhazip.com/"
