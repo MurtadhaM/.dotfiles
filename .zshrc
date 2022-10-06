@@ -204,3 +204,9 @@ export GOOGLE_APPLICATION_CREDENTIALS='/Users/m/.config/gcloud/application_defau
 
 complete -o nospace -C /usr/local/bin/terraform terraform
 
+function dockerFile(){
+cp ~/.gitignore ./.dockerignore;
+touch Dockerfile;
+}
+
+
