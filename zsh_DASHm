@@ -210,3 +210,4 @@ plugins=( git alias-finder autojump fzf git npm zsh-autosuggestions zsh-syntax-h
 alias cat="cat"
 
 #  ~/.zshrc
+alias find=find

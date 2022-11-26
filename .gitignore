@@ -1,11 +1,12 @@
 # OS X
 .DS_Store
-._*
+.DS_Store
 
+/node_modules/
+._*
+node_modules 
 # Windows
 Thumbs.db
-# Node Modules 
-node_modules
 
 # PHP Storm, other java IDE's
 .idea
