@@ -142,3 +142,5 @@ EOF
 echo "${ZSH_PROFILE}" >> "${HOME}/.zshrc"
 
 
+git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
+echo base16_atelier-forest >> ~/.zshrc
