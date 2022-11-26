@@ -1,3 +1,4 @@
+#  source /usr/local/share/zsh-you-should-use/you-should-use.plugin.zsh
 # If you come from bash you might have to change your $PATH.
 # exsort PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
@@ -69,7 +70,8 @@ ZSH_THEME="agnoster" # set by `omz`
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git alias-finder   fzf    git npm zsh-autosuggestions zsh-completions zsh-syntax-highlighting  z  colorize grc macos command-not-found  vscode python autoenv zsh-autosuggestions extract zsh-navigation-tools themes)
+#plugins=(git alias-finder   fzf    git npm zsh-autosuggestions zsh-completions zsh-syntax-highlighting  z  colorize grc macos command-not-found  vscode python autoenv 
+#zsh-autosuggestions extract zsh-navigation-tools themes)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -126,7 +128,8 @@ alias top="sudo htop"
 alias find="fd"
 # add support for ctrl+o to open selected file in VS Code
 export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(code {})+abort'"
-source /Users/dashm/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source /Users/dashm/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export PATH="/usr/local/opt/libressl/bin:$PATH"
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 export  PATH='/usr/local/opt/openssl@1.1/bin:/usr/local/opt/libressl/bin:/Users/dashm/.autojump/bin:/Users/dashm/.cargo/bin:./bin:/Users/dashm/.rbenv/shims:/Users/dashm/.rbenv/bin:/Users/dashm/.cabal/bin:/usr/local/heroku/bin:/Users/dashm/.bin:/bin:/usr/local/opt/llvm/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/share/npm/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/sbin:/usr/local/opt/fzf/bin:/Users/dashm/.pyenv/versions/3.11-dev/bin'
@@ -142,11 +145,14 @@ alias code='/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code
 alias code=/Applications/Visual\ Studio\ Code\ -\ Insiders.app/Contents/MacOS/Electron
 alias code=/Applications/Visual\ Studio\ Code\ -\ Insiders.app/Contents/MacOS/Electron
 alias code=/Applications/'Visual\ Studio\ Code\ -\ Insiders.app'/Contents/MacOS/Electron
-plugins=(you-should-use you-should-use git alias-finder autojump fzf git npm zsh-autosuggestions zsh-completions zsh-syntax-highlighting z colorize grc macos command-not-found vscode python  autoenv extract zsh-navigation-tools themes)
+
+#plugins=(you-should-use you-should-use git alias-finder autojump fzf git npm zsh-autosuggestions zsh-completions zsh-syntax-highlighting z colorize grc macos command-not-found vscode 
+
+#python  autoenv extract zsh-navigation-tools themes)
 source /Users/dashm/.oh-my-zsh/oh-my-zsh.sh
 alias usage='du -h -d1'
 alias net='lsof -i '
-source ~/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh		
+#source ~/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh		
 #~/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 alias powershell='pwsh'
 function powerline_precmd() {
@@ -178,12 +184,29 @@ alias DT_Delete=find ./ -name .DS_Store -depth -exec rm {} ;
 export PATH="/usr/bin:$PATH"
 export NODE_OPTIONS=--openssl-legacy-provider
 export PATH="/usr/local/opt/python@3.10/bin:$PATH"
-  source /usr/local/opt/chruby/share/chruby/chruby.sh
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-NODE_OPTIONS=
-NODE_OPTIONS=''
-export PATH=/Volumes/MacHHD/usr/bin/chromedriver:$PATH
+#  source /usr/local/opt/chruby/share/chruby/chruby.sh
+#  export NVM_DIR="$HOME/.nvm"
+#  [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+#  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+#NODE_OPTIONS=
+#NODE_OPTIONS=''
+#export PATH=/Volumes/MacHHD/usr/bin/chromedriver:$PATH
 export PATH=/Volumes/MacHHD/usr/bin:$PATH
 export NODE_ENV=development
+# plugins=(git alias-finder autojump fzf git npm zsh-autosuggestions zsh-completions zsh-syntax-highlighting z colorize grc macos command-not-found vscode python autoenv 
+#zsh-autosuggestions extract aliases z zsh-interactive-cd autopep8 --version Applications Applications (Parallels) Cisco Packet Tracer 8.2.0 DataGripProjects Desktop Documents Downloads 
+#Library Movies Music PacketTracer7 Parallels Pictures PowerShellProTools Public USBMap gfxutil misc tftpboot virtualenv)
+alias zsh="/usr/local/bin/zsh-5.9"
+  source /usr/local/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+#plugins=(git alias-finder autojump  fzf    git npm zsh-autosuggestions  zsh-syntax-highlighting  z  colorize grc macos command-not-found  vscode python autoenv zsh-autosuggestions z  
+#extract )
+#plugins=(git alias-finder autojump  fzf    git npm zsh-autosuggestions  zsh-syntax-highlighting  z  colorize grc macos command-not-found  vscode python autoenv zsh-autosuggestions z  
+#extract  zsh-autocompletions)
+
+#plugins=(`echo $plugins`) 
+
+plugins=( git alias-finder autojump fzf git npm zsh-autosuggestions zsh-syntax-highlighting z colorize grc macos command-not-found vscode python autoenv zsh-autosuggestions z extract )
+
+alias cat="cat"
+
+#  ~/.zshrc
