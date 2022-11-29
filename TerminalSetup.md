@@ -1,7 +1,21 @@
 # Terminal Setup
 
+<img src="Terminal.png" >
+
+#### IMPORTANT: FONTS NEEDED ARE:
+
+- [Symbols Nerd Font Mono](https://fonts.google.com/specimen/Symbols+NF)
+- [Source Code Pro for Powerline](http://powerline.readthedocs.io/en/latest/installation/linux.html#fonts-installation)s
+
 ## Terminal
 
+
+
+### THEMES
+[OH My Posh](https://ohmyposh.dev/docs/themes)
+
+[LINK TO ZIP](https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v12.22.0/themes.zip
+  )
 
 ### Windows Terminal
 
@@ -82,4 +96,4 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object
           <img src="https://webpages.charlotte.edu/mmarzouq/English/background.jpg"  alt="Murtadha Marzouq" width=150  />
         </a>
         
-[Murtadha Marzouq.](https://www.findasnake.com)
+[Murtadha Marzouq.](https://www.findasnake.com)THEMES https://ohmyposh.dev/docs/themes
