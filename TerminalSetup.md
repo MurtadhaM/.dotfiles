@@ -2,6 +2,9 @@
 
 <img src="Terminal.png" >
 
+```bash
+eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/jandedobbeleer.omp.json)"
+```
 #### IMPORTANT: FONTS NEEDED ARE:
 
 - [Symbols Nerd Font Mono](https://fonts.google.com/specimen/Symbols+NF)
