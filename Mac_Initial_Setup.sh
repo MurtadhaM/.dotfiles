@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# INSTALL BACKGROUND MUSIC APP TO AJUST INDIVIDUAL APPS
+curl https://github.com/kyleneideck/BackgroundMusic/releases/latest/download/BackgroundMusic-0.4.0.pkg -o ~/Downloads/BackgroundMusic.pkg
+open ~/Downloads/BackgroundMusic.pkg
 
 #INSTALL PLIST EDITOR AND OTHER TOOLS
 #https://github.com/5T33Z0/Clover-Crate/tree/main/Utilities
