@@ -211,3 +211,4 @@ alias vnc='/usr/local/Caskroom/vnc-viewer/6.22.315/"VNC Viewer.app"/Contents/Mac
 
 export PATH="$PATH:/Users/m/.local/bin/"
 export PATH="/usr/local/opt/m4/bin:$PATH"
+PATH="/usr/local/bin:$PATH"

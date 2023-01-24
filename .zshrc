@@ -210,3 +210,4 @@ touch Dockerfile;
 }
 
 
+PATH="/usr/local/bin:$PATH"
