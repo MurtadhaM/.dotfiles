@@ -9,3 +9,4 @@ PATH="/usr/local/bin:$PATH"
 alias code='open /Applications/Visual\ Studio\ Code.app'
 alias publicIP='curl -s https://api.ipify.org'
 
+eval "$(register-python-argcomplete az)"
