@@ -1,0 +1,3 @@
+curl -O https://raw.githubusercontent.com/mbruggmann/osx-edid-overrides/main/generate_override.py
+
+python3 generate_override.py
