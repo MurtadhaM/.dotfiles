@@ -211,3 +211,5 @@ touch Dockerfile;
 
 
 PATH="/usr/local/bin:$PATH"
+export COLUMNS=800
+stty columns  $COLUMNS
