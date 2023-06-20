@@ -1,6 +1,5 @@
-<#
+
 # Author: Murtadha Marzouq
-#>
 $Separator = [System.IO.Path]::DirectorySeparatorChar
 
 # Install PowerLine Fonts
