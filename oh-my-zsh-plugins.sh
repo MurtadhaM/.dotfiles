@@ -35,7 +35,7 @@ function install_zsh_plugins(){
     git clone "${URL}" "${DIR}"
     # Install base16-shell
     URL="https://github.com/chriskempson/base16-shell.git" 
-    DIR="${HOME}/.oh-my-zsh/custom/base16-shell"
+    DIR="${HOME}/.oh-my-zsh/plugins/base16-shell"
     git clone "${URL}" "${DIR}"
 
     # ------------------------------------------------------------------------------
@@ -49,6 +49,7 @@ function install_zsh_plugins(){
     echo '    git' >> ~/.zshrc
     echo '    zsh-autosuggestions' >> ~/.zshrc
     echo '    zsh-syntax-highlighting' >> ~/.zshrc
+    echo '    base16-shell' >> ~/.zshrc
     echo '  )' >> ~/.zshrc
     
     
