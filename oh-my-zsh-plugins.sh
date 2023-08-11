@@ -41,15 +41,8 @@ function install_zsh_plugins(){
     # ------------------------------------------------------------------------------
     # Update plugins section
     echo "Updating plugins section..."
-    echo '  plugins=(' >> ~/.zshrc
-    echo '    git' >> ~/.zshrc
-    echo '    zsh-autosuggestions' >> ~/.zshrc
-    echo '    zsh-syntax-highlighting' >> ~/.zshrc
-    echo '     base16-shell' >> ~/.zshrc
-    echo '  )' >> ~/.zshrc
-
+    omz plugin enable git zsh-syntax-highlighting zsh-navigation-tools base16-shell zsh-autosuggestions
     # ------------------------------------------------------------------------------
-
     # UPDATE ZSH SETTINGS
     source ~/.zshrc
     # ------------------------------------------------------------------------------
