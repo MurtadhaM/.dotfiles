@@ -10,8 +10,9 @@
 | Method    | Command                                                                                           |
 |:----------|:--------------------------------------------------------------------------------------------------|
  **OMZZSH**  | ``` sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"``` | 
-| **Themes**  | ```zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/oh-my-zsh-plugins.sh)"  ``` |
-| **Themes**  | ```sh -c "$(curl -fsSL https://raw.githubusercontent.com/romkatv/powerlevel10k/master/install.sh)"``` |
+| **Plugins**  | ```zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/oh-my-zsh-plugins.sh)"  ``` |
+| **Syntax**  | ```sh -c "$(curl -fsSL https://raw.githubusercontent.com/romkatv/powerlevel10k/master/install.sh)"``` |
+| **Theme**  | ```zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/p10k.zsh)"``` |
 
 
 
