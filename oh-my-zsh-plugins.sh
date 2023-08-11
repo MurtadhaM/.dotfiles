@@ -54,7 +54,7 @@ omz plugin enable git zsh-syntax-highlighting zsh-navigation-tools base16-shell 
 # ------------------------------------------------------------------------------
 
 # Setting the Base16 Theme
-base16_pop
+source ~/.oh-my-zsh/custom/base16-shell/scripts/base16-pop.sh
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
