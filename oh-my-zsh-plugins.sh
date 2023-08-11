@@ -47,14 +47,14 @@ install_zsh_plugins
 echo "Plugins installed!"
 
 
-omz plugin enable git zsh-syntax-highlighting zsh-navigation-tools base16-shell zsh-autosuggestions
-# ------------------------------------------------------------------------------
 # UPDATE ZSH SETTINGS
 source ~/.zshrc
+# ------------------------------------------------------------------------------
+omz plugin enable git zsh-syntax-highlighting zsh-navigation-tools base16-shell zsh-autosuggestions
 # ------------------------------------------------------------------------------
 
 # Setting the Base16 Theme
 base16_pop
 # ------------------------------------------------------------------------------
-1
+
 # ------------------------------------------------------------------------------
