@@ -10,13 +10,9 @@ function install_zsh_plugins(){
     
     # OH MY ZSH SETTINGS
     # Path to oh-my-zsh installation
-    echo '  export ZSH="${HOME}/.oh-my-zsh"'  >> ~/.zshrc
     # ZSH Terminal title
     DISABLE_AUTO_TITLE=true
-    # Set name of the theme to load
-    # Update ZSH settings
-    echo '  source $ZSH/oh-my-zsh.sh' >> ~/.zshrc
-    # Set to this to use case-sensitive completion
+  
     
     # installing oh-my-zsh
     echo "Installing oh-my-zsh..."
