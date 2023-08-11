@@ -45,7 +45,7 @@ function install_zsh_plugins(){
     echo '    git' >> ~/.zshrc
     echo '    zsh-autosuggestions' >> ~/.zshrc
     echo '    zsh-syntax-highlighting' >> ~/.zshrc
-    echo '    source $ZSH/custom/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' >> ~/.zshrc
+    echo '    source $ZSH/custom/base16-shell/base16-shell.plugin.zsh' >> ~/.zshrc
 
     # ------------------------------------------------------------------------------
 
