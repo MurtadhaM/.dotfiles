@@ -4,9 +4,9 @@ function install_zsh_plugins(){
     # Install powerline fonts
     echo "Installing powerline fonts..."
     cd "~"
-    git clone https://github.com/powerline/fonts.git --depth=1
-    cd fonts
-    ./install.sh
+    # git clone https://github.com/powerline/fonts.git --depth=1
+    # cd fonts
+    # ./install.sh
     
     # OH MY ZSH SETTINGS
     # Path to oh-my-zsh installation
