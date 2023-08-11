@@ -37,10 +37,6 @@ function install_zsh_plugins(){
     URL="https://github.com/chriskempson/base16-shell.git" 
     DIR="${HOME}/.oh-my-zsh/plugins/base16-shell"
     git clone "${URL}" "${DIR}"
-
-    # ------------------------------------------------------------------------------
-    base16_pop
-    # ------------------------------------------------------------------------------
     # Enable plugins
     # ------------------------------------------------------------------------------
     # Update plugins section
@@ -51,7 +47,16 @@ function install_zsh_plugins(){
     echo '    zsh-syntax-highlighting' >> ~/.zshrc
     echo '    base16-shell' >> ~/.zshrc
     echo '  )' >> ~/.zshrc
+
+    # ------------------------------------------------------------------------------
+
+    # UPDATE ZSH SETTINGS
+    source ~/.zshrc
+    # ------------------------------------------------------------------------------
     
+    # Setting the Base16 Theme
+    base16_pop
+    # ------------------------------------------------------------------------------
     
 }
 
