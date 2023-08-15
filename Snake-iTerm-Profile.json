@@ -10,7 +10,7 @@
     "Red Component" : 0.66666666666666663,
     "Color Space" : "sRGB",
     "Blue Component" : 0.97647058823529409,
-    "Green Component" : 0.32941176470588235
+    "GreenComponent" : 0.32941176470588235
   },
   "Foreground Color (Dark)" : {
     "Red Component" : 0.94901960784313721,
@@ -346,7 +346,7 @@
           },
           "layout advanced configuration dictionary value" : {
             "remove empty components" : true,
-            "font" : "Menlo-Regular 12",
+            "font" : "SourceCodeProForPowerline-MediumIt 17",
             "algorithm" : 1,
             "auto-rainbow style" : 3
           }

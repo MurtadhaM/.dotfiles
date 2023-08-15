@@ -157,6 +157,10 @@ function install_zsh_plugins(){
     
 }
 
+
+
+
+
 if [[ "$(CheckOS)" == "MacOS" ]]; then Install_Mac; fi
 install_zsh_plugins
 
