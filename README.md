@@ -11,9 +11,12 @@
 |:----------|:--------------------------------------------------------------------------------------------------|
  **OMZZSH**  | ``` sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"``` | 
 | **Plugins**  | ```zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/oh-my-zsh-plugins.sh)"  ``` |
+| **TERMINAL ENHANCEMENT**  | <a align="center" href="https://github.com/MurtadhaM/Infrastructure/tree/main/Administration/Colorize%20CLI" target="_blank">Colorize CLI</a> |
+| Github Copilot CLI  | <a align="center" href="https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/COPILOT_CLI.md" target="_blank">Github Copilot CLI</a> |
 | **Syntax**  | ```sh -c "$(curl -fsSL https://raw.githubusercontent.com/romkatv/powerlevel10k/master/install.sh)"``` |
 | **Theme**  | ```zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/p10k.zsh)"``` | 
-| **TERMINAL ENHANCEMENT**  | <a align="center" href="https://github.com/MurtadhaM/Infrastructure/tree/main/Administration/Colorize%20CLI" target="_blank">Colorize CLI</a> |
+
+
 
 
 ### THEMES
