@@ -10,6 +10,22 @@
 
 ---
 
+
+## Scripts
+
+---
+
+```bash
+
+# Install Oh My Zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# Plugins
+zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/oh-my-zsh-plugins.sh)"
+# Github Copilot CLI
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/COPILOT_CLI.md)"
+
+```
+
 #### IMPORTANT: FONTS NEEDED ARE:
 - [Symbols Nerd Font Mono](https://fonts.google.com/specimen/Symbols+NF)
 - [Source Code Pro for Powerline](http://powerline.readthedocs.io/en/latest/installation/linux.html#fonts-installation)
@@ -32,20 +48,11 @@
 ---
 
 
-## Scripts
+# Telnet & SSH Colorize Demo
+---
+<img src="https://github.com/MurtadhaM/Infrastructure/blob/main/Administration/Colorize%20CLI/Chroma.gif" alt="Colorize CLI" width=100% />
 
 ---
-
-```bash
-
-# Install Oh My Zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-# Plugins
-zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/oh-my-zsh-plugins.sh)"
-# Github Copilot CLI
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/COPILOT_CLI.md)"
-
-```
 
 
 # License
