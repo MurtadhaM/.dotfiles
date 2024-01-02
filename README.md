@@ -33,15 +33,15 @@
 
 
 ## Scripts
+
+---
+
 ```bash
+
 # Install Oh My Zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # Plugins
 zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/oh-my-zsh-plugins.sh)"
-# Syntax
-zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/p10k.zsh)"
-# Theme
-zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/p10k.zsh)"
 # Github Copilot CLI
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/COPILOT_CLI.md)"
 
