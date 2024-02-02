@@ -207,19 +207,33 @@ function Delete-Cache() {
 }
 
 
-setup-autocompletion
-oh-my-posh init pwsh --config 'C:\Users\MMARZ\AppData\Local\oh-my-posh\craver.omp.json' | Invoke-Expression
-
-if (test-path $HOME\.dotfiles\profile.ps1) {
-     $PROFILE.CurrentUserCurrentHost=$HOME\.dotfiles\profile.ps1
-}
-else {
+# Download Profile.ps1
+function Get-Profile(){
+    
+if (!(test-path ~\.dotfiles)) {
+    Write-Host "Downloading Profile"
+    
     # Download Profile from GitHub
-    $url="https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/profile.ps1" 
-    $output="$HOME\.dotfiles\profile.ps1"
-    Invoke-WebRequest -Uri $url -OutFile $output
+    $url="https://github.com/MurtadhaM/.dotfiles"
+    # Clone Repo
+    cd ~
+    git clone $url
+    # Set Profile
+    $PROFILE.CurrentUserCurrentHost=~\.dotfiles\profile.ps1
+
+}else {
+        # Skip Download
+        Write-Host "Skipping Download"
+        # Set Profile
+        $PROFILE.CurrentUserCurrentHost=~\.dotfiles\profile.ps1
+    
+}
 }
 
+setup-autocompletion
+oh-my-posh init pwsh --config 'C:\Users\MMARZ\AppData\Local\oh-my-posh\plague.omp.json' | Invoke-Expression
+Set-PoshPrompt -Theme plague
 
 
-$PROFILE=$HOME\profile.ps1
+
+
