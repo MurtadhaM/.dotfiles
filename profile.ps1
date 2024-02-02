@@ -205,7 +205,6 @@ if (!(test-path ~\.dotfiles)) {
         # Skip Download
         Write-Host "Skipping Download"
         # Set Profile
-        . ~\.dotfiles\profile.ps1
 }
 }
 
