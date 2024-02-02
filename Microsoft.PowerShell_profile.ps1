@@ -1,5 +1,8 @@
-<#
-Murtadha Marzouq PowerShell Profile
+### INTERESTING PROFILE HERE --- 
+#  https://raw.githubusercontent.com/ChrisTitusTech/powershell-profile/main/Microsoft.PowerShell_profile.ps1
+#--------------------------------------------------
+
+<# Murtadha Marzouq PowerShell Profile
 
 CHANGE GLOBALLY
 pwsh -ExecutionPolicy Bypass -NoExit -File  %userprofile%/profile.ps1
