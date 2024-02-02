@@ -218,8 +218,7 @@ function main() {
     setup-autocompletion
     # Oh-My-Posh
     Write-Host "Setting Up Oh-My-Posh" -ForegroundColor Green
-    oh-my-posh init pwsh --config 'C:\Users\MMARZ\AppData\Local\Programs\oh-my-posh\themes\plague.omp.json' | Invoke-Expression
-    Set-PoshPrompt -Theme plague
+    Set-PoshPrompt -Theme '~\appdata\local\Programs\oh-my-posh\themes\plague.omp.json'
     Write-Host "Loading Profile" -ForegroundColor Blue
 }
 
