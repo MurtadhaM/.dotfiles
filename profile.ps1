@@ -115,26 +115,6 @@ function wsl_prep() {
 }
 
 
-function main() {
-    # check if powershell version is 7.1
-    $version = $PSVersionTable.PSVersion.Major
-
-    if ($version -eq 7) {
-        Write-Host "PowerShell Version is 7"
-
-    }
-    else {
-        Write-Host "PowerShell Version is not 7"
-        # Install PowerShell 7
-        winget install --id Microsoft.PowerShell --source winget
-        winget  install --id Microsoft.PowerShell.Preview --source winget
-        # Set PowerShell 7 as default
-    
-    }
-
-
-
-}
 
 
 function SHOW_SPIES() { netstat -anob | findstr exe  | unique | sort | unique }
@@ -225,14 +205,28 @@ if (!(test-path ~\.dotfiles)) {
         # Skip Download
         Write-Host "Skipping Download"
         # Set Profile
-        $PROFILE.CurrentUserCurrentHost=~\.dotfiles\profile.ps1
-    
+        . ~\.dotfiles\profile.ps1
 }
 }
 
-setup-autocompletion
-oh-my-posh init pwsh --config 'C:\Users\MMARZ\AppData\Local\oh-my-posh\plague.omp.json' | Invoke-Expression
-Set-PoshPrompt -Theme plague
+
+function main() {
+    # Get Profile
+    Write-Host "Checking Profile" -ForegroundColor Green
+    Get-Profile
+    # Auto-Completion
+    Write-Host "Setting Up Auto-Completion" -ForegroundColor Green
+    setup-autocompletion
+    # Oh-My-Posh
+    Write-Host "Setting Up Oh-My-Posh" -ForegroundColor Green
+    oh-my-posh init pwsh --config 'C:\Users\MMARZ\AppData\Local\Programs\oh-my-posh\themes\plague.omp.json' | Invoke-Expression
+    Set-PoshPrompt -Theme plague
+    Write-Host "Loading Profile" -ForegroundColor Blue
+}
+
+# Run Main
+main
+
 
 
 
