@@ -216,6 +216,7 @@ function main() {
     # Auto-Completion
     Write-Host "Setting Up Auto-Completion" -ForegroundColor Green
     setup-autocompletion
+    Import-Module CompletionPredictor
     # Oh-My-Posh
     Write-Host "Setting Up Oh-My-Posh" -ForegroundColor Green
     Set-PoshPrompt -Theme '~\appdata\local\Programs\oh-my-posh\themes\plague.omp.json'
