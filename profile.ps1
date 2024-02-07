@@ -207,7 +207,26 @@ if (!(test-path ~\.dotfiles)) {
         # Set Profile
 }
 }
+function update-profile() {
+    # Update Profile
+    cd ~\.dotfiles
+    git pull
+    # Set Profile
+    ~\.dotfiles\profile.ps1
+    # Reload Profile
 
+}
+
+
+function GET-ENVIRONMENT-PATH(){
+    Write-Host "Environment Path: $env:PATH" -ForegroundColor Green 
+    Write-Host "Environment Path: $env:PSModulePath" -ForegroundColor Green
+}
+
+function ADD-ENVIRONMENT-PATH($path) {
+    $env:PATH += ";$path"
+    $env:PSModulePath += ";$path"
+}
 
 function main() {
     # Get Profile
@@ -222,7 +241,6 @@ function main() {
     Set-PoshPrompt -Theme '~\appdata\local\Programs\oh-my-posh\themes\plague.omp.json'
     Write-Host "Loading Profile" -ForegroundColor Blue
 }
-
 # Run Main
 main
 
