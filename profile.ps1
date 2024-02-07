@@ -235,7 +235,7 @@ function UPLOAD-PROFILE(){
     # Set Profile
     $PROFILE=~\.dotfiles\profile.ps1
     # Reload Profile
-    . $PROFILE
+    $PROFILE
 }
 
 
