@@ -1,6 +1,11 @@
 ### INTERESTING PROFILE HERE --- 
-#  https://raw.githubusercontent.com/ChrisTitusTech/powershell-profile/main/Microsoft.PowerShell_profile.ps1
+#  https://raw.githubusernt.com/ChrisTitusTech/powershell-profile/main/Microsoft.PowerShell_profile.ps1
 #--------------------------------------------------
+
+# Mintty
+
+# Set Bash to point to mintty to prevent WSL from opening in Windows Terminal
+Set-Alias bash mintty
 
 
 # Global Variables
@@ -207,14 +212,30 @@ if (!(test-path ~\.dotfiles)) {
         # Set Profile
 }
 }
-function update-profile() {
+function Reset-Profile() {
+    Write-Host "Resetting Profile" -ForegroundColor Green
     # Update Profile
     cd ~\.dotfiles
-    git pull
+    git pull 
     # Set Profile
-    ~\.dotfiles\profile.ps1
+    echo '. ~\.dotfiles\profile.ps1' > $PROFILE
+    cd ~
+    . ~\.dotfiles\profile.ps1
     # Reload Profile
 
+
+}
+
+function UPLOAD-PROFILE(){
+    # Upload Profile
+    cd ~\.dotfiles
+    git add .
+    git commit -m "Updated Powershell Profile"
+    git push
+    # Set Profile
+    $PROFILE=~\.dotfiles\profile.ps1
+    # Reload Profile
+    . $PROFILE
 }
 
 
@@ -228,7 +249,7 @@ function ADD-ENVIRONMENT-PATH($path) {
     $env:PSModulePath += ";$path"
 }
 
-function main() {
+function Init-Script() {
     # Get Profile
     Write-Host "Checking Profile" -ForegroundColor Green
     Get-Profile
@@ -241,10 +262,25 @@ function main() {
     Set-PoshPrompt -Theme '~\appdata\local\Programs\oh-my-posh\themes\plague.omp.json'
     Write-Host "Loading Profile" -ForegroundColor Blue
 }
-# Run Main
-main
 
 
+## MAIN
+function START-UP(){
+    Write-Host "Starting Up" -ForegroundColor Green
+    # Set Profile
+    Set-PoshPrompt -Theme '~\appdata\local\Programs\oh-my-posh\themes\plague.omp.json' 
+    # BASIC SETUP
+    # Setting Keybinds
+    set-PSReadLineKeyHandler -Key Ctrl+a -Function BeginningOfLine
+    set-PSReadLineKeyHandler -Key Ctrl+e -Function EndOfLine
+    #  delete the whole line
+    set-PSReadLineKeyHandler -Key Ctrl+k -Function KillLine
+    # Set Default Editor
+    $env:EDITOR = 'notepad'
+    # Set Default Browser
+    $env:BROWSER = 'firefox.exe'
 
+}
 
-
+## CALL START-UP
+START-UP
