@@ -1,5 +1,4 @@
 function install_zsh_plugins(){
-    
     # ------------------------------------------------------------------------------
     # Install powerline fonts
     echo "Installing powerline fonts..."
@@ -7,13 +6,10 @@ function install_zsh_plugins(){
     # git clone https://github.com/powerline/fonts.git --depth=1
     # cd fonts
     # ./install.sh
-    
     # OH MY ZSH SETTINGS
     # Path to oh-my-zsh installation
     # ZSH Terminal title
     DISABLE_AUTO_TITLE=true
-  
-    
     # installing oh-my-zsh
     echo "Installing oh-my-zsh..."
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -37,7 +33,6 @@ function install_zsh_plugins(){
     # ------------------------------------------------------------------------------
     # Update plugins section
     echo "Updating plugins section..."
-    
 }
 
 # ------------------------------------------------------------------------------
