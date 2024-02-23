@@ -1,7 +1,7 @@
-
+#!/usr/
 # This script is used to initialize tmux with a set of windows and panes
 # Set the session name
-SESSION="tmux"
+SESSION="PRESISTENT"  
 # FUNCTION TO INSTALL THE
 function install-themepack(){
 # Download TMUX-Themepack
@@ -37,5 +37,8 @@ omz plugin enable tmux tmuxinator
 tmux source-file ~/.tmux.conf
 # Install the tmux plugin manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 }
 install-themepack
+# Start new session with our name
+tmux new-session -d -s $SESSION
