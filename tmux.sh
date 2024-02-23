@@ -1,29 +1,29 @@
-# This script is used to initialize tmux with a set of windows and panes
-# Set the session name
-SESSION="PRESISTENT"  
-# FUNCTION TO INSTALL THE
+### TMUX CONFIGURATION
+echo <<EOT>> ~/.tmux.conf
+### START TMUX CONFIGURATION
+source-file ~/.tmux-themepack/powerline/double/orange.tmuxtheme
+set -g mouse on
+set -g default-shell /bin/zsh
+set -g default-command /bin/zsh
+set -g base-index 1
+set -g pane-base-index 1
+set -g status on
+set -g status-position bottom
+set -g status-style bg=colour235,fg=colour136,bright
+set -g window-style bg=colour235,fg=colour250
+set -g window-active-style bg=colour236,fg=colour137,bright
+### END TMUX CONFIGURATION
+EOT
+
+
+
+
+### TMUX INSTALLATION
 function install-themepack(){
 # Download TMUX-Themepack
 git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux-themepack
 # Set the default theme
 tmux set -g @themepack 'powerline/block/cyan'
-# Add the following line to your ~/.tmux.conf to use the theme
-echo source-file ~/.tmux-themepack/powerline/double/orange.tmuxtheme > ~/.tmux.conf
-# enable scroll
-echo set -g mouse on >> ~/.tmux.conf
-# Set the default shell
-echo set -g default-shell /bin/zsh >> ~/.tmux.conf
-# Set the default command
-echo set -g default-command /bin/zsh >> ~/.tmux.conf
-# Set the default window index
-echo set -g base-index 1 >> ~/.tmux.conf
-# Set the default pane index
-echo set -g pane-base-index 1 >> ~/.tmux.conf
-# Set the default status
-echo set -g status on >> ~/.tmux.conf
-# Set the default status position
-echo set -g status-position bottom >> ~/.tmux.conf
-# Set the default status style
 echo set -g status-style bg=colour235,fg=colour136,bright >> ~/.tmux.conf
 # Set the default window style
 echo set -g window-style bg=colour235,fg=colour250 >> ~/.tmux.conf
@@ -34,7 +34,10 @@ source ~/.zshrc
 omz plugin enable tmux tmuxinator
 # Reload the tmux configuration
 tmux source-file ~/.tmux.conf
-# Install the tmux plugin manager
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
 }
+
+### Run the function
+install-themepack
+
+
+
