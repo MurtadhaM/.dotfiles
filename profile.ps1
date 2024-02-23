@@ -14,6 +14,8 @@ $PSDefaultParameterValues['*:Set-Content:Encoding'] = 'utf8'
 $PSDefaultParameterValues['*:Export-Csv:Encoding'] = 'utf8'
 $PSDefaultParameterValues['*:Import-Csv:Encoding'] = 'utf8'
 
+# GIT ENDOF LINE
+git config --global core.autocrlf true
 
 $Content = @'
 # Posh Setup
