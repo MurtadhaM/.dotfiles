@@ -21,6 +21,8 @@
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # Plugins
 zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/oh-my-zsh-plugins.sh)"
+# TMUX
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/tmux.sh)"
 # Github Copilot CLI
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/COPILOT_CLI.md)"
 
