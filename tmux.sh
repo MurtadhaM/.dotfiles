@@ -1,4 +1,3 @@
-#!/usr/
 # This script is used to initialize tmux with a set of windows and panes
 # Set the session name
 SESSION="PRESISTENT"  
@@ -39,6 +38,3 @@ tmux source-file ~/.tmux.conf
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 }
-install-themepack
-# Start new session with our name
-tmux new-session -d -s $SESSION
