@@ -1,5 +1,5 @@
 ### TMUX CONFIGURATION
-echo <<EOT>> ~/.tmux.conf
+cat  <<EOT>> ~/.tmux.conf
 ### START TMUX CONFIGURATION
 source-file ~/.tmux-themepack/powerline/double/orange.tmuxtheme
 set -g mouse on
