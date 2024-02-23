@@ -33,4 +33,5 @@ echo set -g window-active-style bg=colour236,fg=colour137,bright >> ~/.tmux.conf
 # Reading COnfig
 source ~/.zshrc
 omz plugin enable tmux tmuxinator
+}
 install-themepack
