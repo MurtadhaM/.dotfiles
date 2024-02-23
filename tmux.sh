@@ -17,9 +17,6 @@ set -g @plugin 'jimeh/tmux-themepack'
 #source-file ~/.tmux-themepack/powerline/double/red.tmuxtheme
 source-file ${HOME}/.tmux-themepack/powerline/default/green.tmuxtheme
 
-# ACTIVE WINDOW
-set -g window-active-style bg=colour236,fg=colour137,bright
-
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'
 ### END TMUX CONFIGURATION
