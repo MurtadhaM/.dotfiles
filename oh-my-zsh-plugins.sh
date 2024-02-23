@@ -73,5 +73,6 @@ echo 'source ~/.oh-my-zsh/custom/plugins/base16-shell/scripts/base16-pop.sh' >> 
 # ------------------------------------------------------------------------------
 }
 #------------------------------------------------------------------------------
-# Change the theme
-base_enable
+# Change the theme and enable base16 theme
+base16_material-vivid
+enable_base16
