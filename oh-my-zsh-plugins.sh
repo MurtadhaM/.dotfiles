@@ -3,10 +3,10 @@ function install_zsh_plugins(){
     # Install powerline fonts
     echo "Installing powerline fonts..."
     cd "~"
-    # git clone https://github.com/powerline/fonts.git --depth=1
-    # cd fonts
-    # ./install.sh
-    # OH MY ZSH SETTINGS
+    git clone https://github.com/powerline/fonts.git --depth=1
+    cd fonts
+    ./install.sh
+    #OH MY ZSH SETTINGS
     # Path to oh-my-zsh installation
     # ZSH Terminal title
     DISABLE_AUTO_TITLE=true
@@ -43,7 +43,7 @@ echo "Plugins installed!"
 # UPDATE ZSH SETTINGS
 source ~/.zshrc
 # ------------------------------------------------------------------------------
-omz plugin enable git zsh-syntax-highlighting zsh-navigation-tools base16-shell zsh-autosuggestions
+omz plugin enable git zsh-syntax-highlighting zsh-navigation-tools base16-shell zsh-autosuggestions z fzf tmux 
 
 # ------------------------------------------------------------------------------
 ### SETUP CHROMA TERMINAL (Unix & Linux)
@@ -72,7 +72,20 @@ source ~/.oh-my-zsh/custom/plugins/base16-shell/scripts/base16-pop.sh
 echo 'source ~/.oh-my-zsh/custom/plugins/base16-shell/scripts/base16-pop.sh' >> ~/.zshrc
 # ------------------------------------------------------------------------------
 }
+
+
+
+
+
+
+
+
+
+
+
+function main(){
 #------------------------------------------------------------------------------
 # Change the theme and enable base16 theme
 base16_material-vivid
 enable_base16
+}
