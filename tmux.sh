@@ -40,4 +40,6 @@ tmux source-file ~/.tmux.conf
 ### Run the function
 install-tmux-tools
 
+# APPEND TMUX THEME TO ZSHRC
+tmux source-file /home/dash/.tmux-themepack/powerline/default/green.tmuxtheme
 
