@@ -35,10 +35,6 @@ function install_zsh_plugins(){
     echo "Updating plugins section..."
 }
 
-
-
-#Base16 Theme
-# ------------------------------------------------------------------------------
 function base_enable() {
 
 # Install base16-shell
@@ -52,12 +48,10 @@ source ~/.oh-my-zsh/custom/plugins/base16-shell/scripts/base16-pop.sh
 # ZSH CUSTOM SETTINGS
 echo 'source ~/.oh-my-zsh/custom/plugins/base16-shell/scripts/base16-pop.sh' >> ~/.zshrc
 # ------------------------------------------------------------------------------
+
 }
 
 
-
-
-function main(){
 # INSTALL ZSH PLUGINS
 install_zsh_plugins
 # ------------------------------------------------------------------------------
@@ -66,7 +60,6 @@ install_zsh_plugins
 # Path to oh-my-zsh installation
 # ZSH Terminal title
 DISABLE_AUTO_TITLE=true
-
 #------------------------------------------------------------------------------
 # Install oh-my-zsh
 echo "Installing oh-my-zsh..."
@@ -74,15 +67,17 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 # ------------------------------------------------------------------------------
 # Base16 Shell
 # ------------------------------------------------------------------------------
-enable_base16
+base_enable
 # ------------------------------------------------------------------------------
 # Change the theme and enable base16 theme
 base16_material-vivid
 # ------------------------------------------------------------------------------
+# Set the powerlevel10k theme
+echo "Setting the powerlevel10k theme..."
+echo 'source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc
+# ------------------------------------------------------------------------------
 # Enable plugins
-omz plugin enable tmux-cssh tmuxinator git zsh-syntax-highlighting zsh-navigation-tools base16-shell zsh-autosuggestions z fzf tmux tmux-cssh tmuxinator zsh-interactive-cd fzf git aliases themes
-}
-
+omz git zsh-syntax-highlighting zsh-navigation-tools base16-shell zsh-autosuggestions z fzf tmux tmux-cssh tmuxinator zsh-interactive-cd aliases themes
 
 
 
