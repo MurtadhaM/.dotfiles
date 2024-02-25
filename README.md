@@ -63,7 +63,7 @@ zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/
 
 # Author
 <a href="">
-          <img src="https://webpages.charlotte.edu/mmarzouq/English/background.jpg"  alt="Murtadha Marzouq" width=150  />
+          <img src="https://avatars.githubusercontent.com/u/45076915"  alt="Murtadha Marzouq" width=150  />
         </a>
         
 ---
