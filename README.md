@@ -66,4 +66,12 @@ zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/
           <img src="https://webpages.charlotte.edu/mmarzouq/English/background.jpg"  alt="Murtadha Marzouq" width=150  />
         </a>
         
+---
+
+### EXTRA NOTES:
+- [x] [Windows Excellent Terminal -MobaXterm](https://mobaxterm.mobatek.net/)
+  - A terminal for Windows with a lot of features and plugins like tmux, ssh, telnet, etc.
+  
+![alt text](image.png)
+
 [Murtadha Marzouq.](https://www.findasnake.com)
