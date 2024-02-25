@@ -72,6 +72,6 @@ zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/
 - [x] [Windows Excellent Terminal -MobaXterm](https://mobaxterm.mobatek.net/)
   - A terminal for Windows with a lot of features and plugins like tmux, ssh, telnet, etc.
   
-![alt text](image.png)
+![alt text](MobaXterm.png)
 
 [Murtadha Marzouq.](https://www.findasnake.com)
