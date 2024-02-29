@@ -38,8 +38,6 @@ zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/
 | **Plugins**  |  <a align="center" href="https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/oh-my-zsh-plugins.sh" target="_blank">Plugins</a> |
 | **TERMINAL ENHANCEMENT**  | <a align="center" href="https://github.com/MurtadhaM/Infrastructure/tree/main/Administration/Colorize%20CLI" target="_blank">Colorize CLI</a> |
 | Github Copilot CLI  | <a align="center" href="https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/COPILOT_CLI.md" target="_blank">Github Copilot CLI</a> |
-| **Syntax**  | <a align="center" href="https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/p10k.zsh" target="_blank">Syntax</a> |
-| **Theme**  | <a align="center" href="https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/p10k.zsh" target="_blank">Theme</a> |
 
 
 ---
@@ -52,13 +50,16 @@ zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/
 
 # Telnet & SSH Colorize Demo
 ---
-<img src="https://github.com/MurtadhaM/Infrastructure/blob/main/Administration/Colorize%20CLI/Chroma.gif" alt="Colorize CLI" width=100% />
+<img src="https://github.com/MurtadhaM/Infrastructure/blob/main/Administration/Colorize%20CLI/Chroma.gif?raw=true" alt="Colorize CLI" width=100% />
 
 ---
 
 
 # License
+---
+This project is licensed under the terms of the
 [MIT](https://raw.githubusercontent.com/MurtadhaM/.dotfiles/master/LICENSE)
+
 
 
 # Author
