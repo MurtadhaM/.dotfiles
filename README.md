@@ -1,32 +1,42 @@
 # Terminal Setup
----
-<p align="center">
-<a href="#scripts"> <img src="https://img.shields.io/badge/Setup-Script-red" width=40% alt="Terminal Setup" /></a>
-</p>
+
+<p ><a href="#scripts"> <img src="https://img.shields.io/badge/Setup-Script-blue" width=20% alt="Terminal Setup" /></a> </p>
 
 ---
 
-<img src="Terminal.png" alt="Terminal Setup" width=100% />
+- [ ]   Installation Scripts
+  - [X] [Oh-My-Zsh](####-Install-Oh-My-Zsh-🚀)
+  - [X] [Plugins](####-Plugins-🪙)
+  - [X] [Custom ZSH Config](####-Custom-ZSH-Config-💰)
+  - [X] [TMUX Config](####-TMUX-Config-🎨)
+  - [X] [Github Copilot CLI](####-Github-Copilot-CLI-🚀)
 
----
-
-
-## Scripts
-
----
-
+#### Install Oh My Zsh 🚀
 ```bash
-
-# Install Oh My Zsh
 zsh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-# Plugins
-zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/oh-my-zsh-plugins.sh)"
-# TMUX
-zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/tmux.sh)"
-# Github Copilot CLI
-zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/COPILOT_CLI.md)"
-
 ```
+#### Plugins 🪙
+```bash
+zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/oh-my-zsh-plugins.sh)"
+```
+#### Custom ZSH Config 💰
+```bash
+zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/ZshrcCustomConfig.sh)"
+```
+#### TMUX Config 🎨
+```bash
+zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/tmux.sh)"
+```
+#### Github Copilot CLI 🚀
+```bash
+zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/COPILOT_CLI.md)"
+```
+---
+
+- #### Screenshot:
+  
+<p align=center><img src="Terminal.png" alt="Terminal Setup" width=100% /></p>
+
 
 #### IMPORTANT: FONTS NEEDED ARE:
 - [Symbols Nerd Font Mono](https://fonts.google.com/specimen/Symbols+NF)
