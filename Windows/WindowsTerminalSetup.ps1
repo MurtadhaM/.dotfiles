@@ -76,8 +76,6 @@ $packages = @(
         winget install --id $package --source winget 
         Write-Host "🖊️ $package Installed 👀 " -ForegroundColor Green
     }   
-    
-
 }
 
 
@@ -101,6 +99,7 @@ function Install-MSYS2(){
     }
 
 }
+
 
 
 

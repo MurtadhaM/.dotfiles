@@ -13,3 +13,12 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MurtadhaM/.dotfiles/ma
 Start-Process -FilePath "WindowsTerminalSetup.ps1"
 ```
 
+### Oh-My-Basj Setup 🚀
+
+```powershell
+<# Oh-My-Bash Setup 🚀 #>
+# Inide of MSYS2 Bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
+```
+
+
