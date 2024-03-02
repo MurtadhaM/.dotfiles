@@ -64,7 +64,7 @@ $packages = @(
     "PuTTY.PuTTY",
     "GitHub.cli",
     "Git.Git",
-    "Python.Launcher",
+    "Python.Launcher"
     )
     # Remove already installed packages
     $packages = $packages | Where-Object {$_ -notin $winget_packages}    
