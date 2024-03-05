@@ -32,48 +32,65 @@ function Install-Winget(){
 } else {
     Write-Host "winget already installed" -ForegroundColor Green
 }
- 
+}
+function Install-Choco(){
+    # Check if Choco is installed
+    $choco = Get-Command choco -ErrorAction SilentlyContinue
+
+    if ($choco -eq $null) {
+        # Attempt to install choco
+        Write-Host "Installing Choco" -ForegroundColor Green
+        # Method 1 (Run as Administrator)
+        Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+        # Check if choco is installed
+        $choco = Get-Command choco -ErrorAction SilentlyContinue
+        if ($choco -eq $null) {
+            Write-Host "Attempting to Install Choco Method #2" -ForegroundColor Green
+            # Method 2 (Run as Administrator)
+            irm https://chocolatey.org/install.ps1 | iex
+        }
+        else{
+        Write-Host "🖊️ "
+        Write-Host "Choco Installed 👀 !" -ForegroundColor Green
+        }
+
+        } else {
+            Write-Host "Choco already installed" -ForegroundColor Green
+        }
+
 }
 
+function Install-Choco-Packages(){
 
-function Install-Winget-Packages(){
-
-<# List of ALREADY INSTALLED WINGET PACKAGES#>
-$winget_packages = ((winget list) -match ' winget$' | Select-String -Pattern "(?<= {2,})(?!\d+\.\d+)\S+(?= {2,})") | foreach {$_.Matches.Value}
-$winget_packages = $winget_packages -replace ' ', '.'
-
- <# LIST OF PACKAGE IDs TO INSTALL WITH WINGET#>
 $packages = @(
-    "7zip.7zip",
-    "Git.Git",
-    "Google.Chrome",
-    "JernejSimoncic.Wget",
-    "rcmaehl.MSEdgeRedirect",
+    "7zip",
+    "git",
+    "google-chrome-x64",
+    "wget",
     "Microsoft.WindowsTerminal",
-    "Microsoft.PowerToys",
-    "Insecure.Nmap",
-    "VideoLAN.VLC",
-    "WinDirStat.WinDirStat",
-    "RARLab.WinRAR",
-    "WiresharkFoundation.Wireshark",
-    "jqlang.jq",
-    "junegunn.fzf",
-    "WinSCP.WinSCP",
-    "Microsoft.VisualStudioCode.Insiders",
-    "Chocolatey.Chocolatey",
-    "PuTTY.PuTTY",
-    "GitHub.cli",
-    "Git.Git",
-    "Python.Launcher"
+    "powertoys",
+    "nmap",
+    "vlc",
+    "windirstat",
+    "winrar",
+    "wireshark",
+    "jq",
+    "fzf",
+    "winscp",
+    "vscode-insiders",
+    "putty",
+    "gh",
+    "python",
+    "python3-virtualenv"
     )
-    # Remove already installed packages
+# Remove already installed packages
     $packages = $packages | Where-Object {$_ -notin $winget_packages}    
     # Install packages
     $total = $packages.Count
     Write-Host Installing $total packages -ForegroundColor Green
     foreach ($package in $packages) {
         Write-Host Installing $package $packages ($packages.IndexOf($package) + 1) of $total -ForegroundColor Blue
-        winget install --id $package --source winget 
+        choco install - $package  -
         Write-Host "🖊️ $package Installed 👀 " -ForegroundColor Green
     }   
 }
@@ -100,6 +117,78 @@ function Install-MSYS2(){
 
 }
 
+<# INSTALL Chromaterm#>
+function Install-Chromaterm(){
+    # CHECK IF PYTHON IS INSTALLED
+    $python = Get-Command python -ErrorAction SilentlyContinue
+    if ($python -eq $null) {
+        Write-Host "Python is not installed" -ForegroundColor Red
+        Write-Host "Installing Python" -ForegroundColor Green
+        choco install python -y
+    }
+    else{
+        Write-Host "Python is already installed" -ForegroundColor Green
+    }
+    # INSTALL CHROMATERM USING PIP
+    pip install https://github.com/hSaria/ChromaTerm/archive/refs/heads/windows.zip
+    Write-Host "🖊️ Chromaterm Installed 👀 !" -ForegroundColor Green
+    # DOWNLOAD CHROMATERM CONFIG
+    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MurtadhaM/Infrastructure/main/Administration/Colorize%20CLI/chromaterm.yml" -OutFile $HOME\.chromaterm.yml
+    # MOVE CHROMATERM CONFIG TO APPDATA
+    Write-Host "🖊️ Chromaterm Config Installed 👀 !" -ForegroundColor Green
+    copy-Item -Path $HOME\.chromaterm.yml -Destination $env:APPDATA\chromaterm.yml
+}
+
+<# INSTALL WSL2#>
+function Install-WSL2(){
+    # Check if WSL2 is installed
+    $wsl = Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+    if ($wsl -eq $null) {
+        Write-Host "Installing WSL2" -ForegroundColor Green
+        # Enable WSL2
+        dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+        # Enable Virtual Machine Platform
+        dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+        # Download and Install WSL2 Linux Kernel
+        Invoke-WebRequest -Uri "https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi" -OutFile "wsl_update_x64.msi"
+        Start-Process -Wait -FilePath "wsl_update_x64.msi"
+        # Set WSL2 as Default
+        wsl --set-default-version 2
+        Write-Host "🖊️ WSL2 Installed 👀 !" -ForegroundColor Green
+    }
+    else{
+        Write-Host "WSL2 already installed" -ForegroundColor Green
+    }
+}
+
+<# INSTALL WSL2 Distro#>
+function Install-WSL2-Distro(){
+    # Check if WSL2 Distro is installed
+    $wsl_distro = Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+    if ($wsl_distro -eq $null) {
+        Write-Host "Installing WSL2 Distro" -ForegroundColor Green
+        # Download and Install Ubuntu 20.04
+        Invoke-WebRequest -Uri "https://aka.ms/wslubuntu2004" -OutFile "Ubuntu2004.appx" -UseBasicParsing
+        Add-AppxPackage .\Ubuntu2004.appx
+        Write-Host "🖊️ WSL2 Distro Installed 👀 !" -ForegroundColor Green
+    }
+    else{
+        Write-Host "WSL2 Distro already installed" -ForegroundColor Green
+    }
+}
 
 
 
+<# INSTALL ALL#>
+function Install-All(){
+    Install-Winget
+    Install-Choco
+    Install-Choco-Packages
+    Install-MSYS2
+    Install-Chromaterm
+    Install-WSL2
+    Install-WSL2-Distro
+    Install-Fonts
+}
+
+Install-All
