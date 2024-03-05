@@ -63,6 +63,7 @@ function Install-Choco(){
 function Install-Choco-Packages(){
 
 $packages = @(
+    "pwsh"
     "7zip",
     "git",
     "google-chrome-x64",
@@ -71,6 +72,7 @@ $packages = @(
     "powertoys",
     "nmap",
     "vlc",
+    "oh-my-posh",
     "windirstat",
     "winrar",
     "wireshark",
@@ -90,7 +92,9 @@ $packages = @(
     Write-Host Installing $total packages -ForegroundColor Green
     foreach ($package in $packages) {
         Write-Host Installing $package $packages ($packages.IndexOf($package) + 1) of $total -ForegroundColor Blue
-        choco install - $package  -
+        # GLOBAL CONFIRMATION
+        choco feature enable -n allowGlobalConfirmation
+        choco install - $package  -y
         Write-Host "🖊️ $package Installed 👀 " -ForegroundColor Green
     }   
 }
@@ -181,14 +185,30 @@ function Install-WSL2-Distro(){
 
 <# INSTALL ALL#>
 function Install-All(){
-    Install-Winget
+    <#Set Execution Policy#> 
+    Write-Host "Setting Execution Policy" -ForegroundColor Yellow
+    Set-ExecutionPolicy Bypass -Scope Process -Force
+    <# INSTALL CHOCO#>
+    Write-Host "Installing Choco" -ForegroundColor Purple
     Install-Choco
+    <# INSTALL ALL CHOCO PACKAGES#>
+    Write-Host "Installing Choco Packages" -ForegroundColor Green 
     Install-Choco-Packages
+    <# INSTALL MSYS2#>
+    Write-Host "Installing MSYS2" -ForegroundColor Blue
     Install-MSYS2
+    <# INSTALL CHROMATERM#>
+    Write-Host "Installing Chromaterm" -ForegroundColor Yellow
     Install-Chromaterm
+    <# INSTALL WSL2#>
+    Write-Host "Installing WSL2" -ForegroundColor Blue
     Install-WSL2
+    <# INSTALL WSL2 Distro#>
+    Write-Host "Installing WSL2 Distro" -ForegroundColor Red
     Install-WSL2-Distro
+    <# INSTALL NERD FONTS#>
+    Write-Host "Installing Nerd Fonts" -ForegroundColor Orange
     Install-Fonts
-}
+} 
 
 Install-All
