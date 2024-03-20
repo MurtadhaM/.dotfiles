@@ -275,6 +275,7 @@ function Init-Script() {
 function START-UP(){
     Write-Host "Starting Up" -ForegroundColor Green
     # Check Oh-My-Posh
+    set-PoshPrompt -Theme '~\appdata\local\Programs\oh-my-posh\themes\plague.omp.json'
     # BASIC SETUP
     # Setting Keybinds
     set-PSReadLineKeyHandler -Key Ctrl+a -Function BeginningOfLine
@@ -299,4 +300,7 @@ START-SERVICE w32time
 ## FORCE SYNC TIME
 W32tm /resync /force
 }
+
+
+
 
