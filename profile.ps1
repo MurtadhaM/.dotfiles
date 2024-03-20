@@ -275,11 +275,6 @@ function Init-Script() {
 function START-UP(){
     Write-Host "Starting Up" -ForegroundColor Green
     # Check Oh-My-Posh
-    Install-Module oh-my-posh -Scope CurrentUser -Force
-    # Import-Module oh-my-posh
-    Import-Module oh-my-posh
-    # Set Profile
-    Set-PoshPrompt -Theme '~\appdata\local\Programs\oh-my-posh\themes\plague.omp.json' 
     # BASIC SETUP
     # Setting Keybinds
     set-PSReadLineKeyHandler -Key Ctrl+a -Function BeginningOfLine
