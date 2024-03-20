@@ -180,6 +180,22 @@ function Install-WSL2-Distro(){
         Write-Host "WSL2 Distro already installed" -ForegroundColor Green
     }
 }
+<# SMART TASKBAR #>
+function INSTALL-SMART-TASKBAR(){
+    # Check if Smart Taskbar is installed
+    $smart_taskbar =Get-Item "C:\Program Files\SmartTaskbar" -ErrorAction ignore
+    if ($smart_taskbar -eq $null) {
+        Write-Host "Installing Smart Taskbar" -ForegroundColor Green
+        # Install Smart Taskbar
+        Invoke-WebRequest -Uri "https://github.com/ChanpleCai/SmartTaskbar/releases/download/v1.4.5/SmartTaskbar_Setup.exe" -OutFile "C:\Windows\TEMP\SmartTaskbar_Setup.exe"
+        Start-Process -Wait -FilePath "C:\Windows\TEMP\SmartTaskbar_Setup.exe" -ArgumentList "/VERYSILENT" 
+    }
+    else{
+        Write-Host "Smart Taskbar already installed" -ForegroundColor Red
+    }
+
+}
+
 
 
 
@@ -209,6 +225,9 @@ function Install-All(){
     <# INSTALL NERD FONTS#>
     Write-Host "Installing Nerd Fonts" -ForegroundColor Orange
     Install-Fonts
-} 
+    <# INSTALL SMART TASKBAR#>
+    Write-Host "Installing Smart Taskbar" -ForegroundColor Green
+    INSTALL-SMART-TASKBAR
 
+} 
 Install-All
