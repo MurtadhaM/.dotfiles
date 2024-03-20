@@ -261,6 +261,11 @@ function Init-Script() {
     Import-Module CompletionPredictor
     # Oh-My-Posh
     Write-Host "Setting Up Oh-My-Posh" -ForegroundColor Green
+    Install-Module oh-my-posh -Scope CurrentUser -Force
+    # Import-Module oh-my-posh
+    Import-Module oh-my-posh
+    # Set Profile
+    Write-Host "Setting Profile" -ForegroundColor Green
     Set-PoshPrompt -Theme '~\appdata\local\Programs\oh-my-posh\themes\plague.omp.json'
     Write-Host "Loading Profile" -ForegroundColor Blue
 }
@@ -269,6 +274,10 @@ function Init-Script() {
 ## MAIN
 function START-UP(){
     Write-Host "Starting Up" -ForegroundColor Green
+    # Check Oh-My-Posh
+    Install-Module oh-my-posh -Scope CurrentUser -Force
+    # Import-Module oh-my-posh
+    Import-Module oh-my-posh
     # Set Profile
     Set-PoshPrompt -Theme '~\appdata\local\Programs\oh-my-posh\themes\plague.omp.json' 
     # BASIC SETUP

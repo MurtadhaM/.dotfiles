@@ -205,7 +205,7 @@ function Install-All(){
     Write-Host "Setting Execution Policy" -ForegroundColor Yellow
     Set-ExecutionPolicy Bypass -Scope Process -Force
     <# INSTALL CHOCO#>
-    Write-Host "Installing Choco" -ForegroundColor Purple
+    Write-Host "Installing Choco" -ForegroundColor Red
     Install-Choco
     <# INSTALL ALL CHOCO PACKAGES#>
     Write-Host "Installing Choco Packages" -ForegroundColor Green 
