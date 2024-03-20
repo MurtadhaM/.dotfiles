@@ -286,3 +286,13 @@ function START-UP(){
 
 ## CALL START-UP
 START-UP
+set-alias -Name pip -Value pip.exe
+
+function SYNC-TIME(){
+# START TIME SERVICE
+START-SERVICE w32time
+START-SERVICE tzautoupdate
+## FORCE SYNC TIME
+W32tm /resync /force
+}
+
