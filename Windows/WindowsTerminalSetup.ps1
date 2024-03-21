@@ -198,7 +198,29 @@ function INSTALL-SMART-TASKBAR(){
 
 
 
+<#  INSTALL CHROMATERM#>
+function Install-Chromaterm(){
+    # CHECK IF PYTHON IS INSTALLED
+    $python = Get-Command python -ErrorAction SilentlyContinue
+    if ($python -eq $null) {
+        Write-Host "Python is not installed" -ForegroundColor Red
+        Write-Host "Installing Python" -ForegroundColor Green
+        choco install python -y
+    }
+    else{
+        Write-Host "Python is already installed" -ForegroundColor Green
+    }
+    # INSTALL CHROMATERM USING PIP
+    pip install https://github.com/hSaria/ChromaTerm/archive/refs/heads/windows.zip
+    Write-host "Warning: CHANGE LINE nano +290 to nano +291 in chromaterm.py" -ForegroundColor Yellow
+    Write-Host "🖊️ Chromaterm Installed 👀 !" -ForegroundColor Green
+    # DOWNLOAD CHROMATERM CONFIG
+    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MurtadhaM/Infrastructure/main/Administration/Colorize%20CLI/chromaterm.yml" -OutFile $HOME\.chromaterm.yml
 
+    # MOVE CHROMATERM CONFIG TO APPDATA
+    Write-Host "🖊️ Chromaterm Config Installed 👀 !" -ForegroundColor Green
+    copy-Item -Path $HOME\.chromaterm.yml -Destination $env:APPDATA\chromaterm.yml
+}
 <# INSTALL ALL#>
 function Install-All(){
     <#Set Execution Policy#> 
@@ -228,6 +250,7 @@ function Install-All(){
     <# INSTALL SMART TASKBAR#>
     Write-Host "Installing Smart Taskbar" -ForegroundColor Green
     INSTALL-SMART-TASKBAR
-
+    Write-Host "🖊️ INSTALL CHROMATERM " -ForegroundColor Green
+    Install-Chromaterm
 } 
 Install-All
