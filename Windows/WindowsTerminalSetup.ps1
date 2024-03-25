@@ -221,6 +221,7 @@ function Install-Chromaterm(){
     Write-Host "🖊️ Chromaterm Config Installed 👀 !" -ForegroundColor Green
     copy-Item -Path $HOME\.chromaterm.yml -Destination $env:APPDATA\chromaterm.yml
 }
+
 <# INSTALL ALL#>
 function Install-All(){
     <#Set Execution Policy#> 
