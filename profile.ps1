@@ -303,8 +303,9 @@ W32tm /resync /force}
 
 if ((Get-Uptime |select Minutes|select Minutes).Minutes -le 10){Write-Host "Updating System Time" -ForegroundColor Yellow ; SYNC-TIME}
 
-function Get-LISTENERS(){
-(((netstat -ynbat|Select-String "\[*exe*"  -Context  1,0 )-replace '\[' -replace '\]' -replace '>' -split
- '\n'  )|sort|unique |Write-Host -ForegroundColor Yellow -Separator "\n")
-}
+function RANDOM-COLOR(){([System.ConsoleColor].DeclaredMembers)[(Get-Random -Maximum 14 -Minimum 2 -SetSeed (((Get-Date -AsUTC).Ticks)%100))].name}
 
+
+function LISTENERS(){
+((NETSTAT.EXE -nba )   -split "\n" -clike "*exe*" -replace "\["  -replace "\]" |sort|unique |ForEach-Object -Process {Write-Host $_ -ForegroundColor ([System.ConsoleColor].DeclaredMembers)[(Get-Random -Maximum 14 -Minimum 2 -SetSeed (((Get-Date -AsUTC).Ticks)%100))].name })
+}
