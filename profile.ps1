@@ -298,9 +298,13 @@ function SYNC-TIME(){
 START-SERVICE w32time
 #START-SERVICE tzautoupdate
 ## FORCE SYNC TIME
-W32tm /resync /force
+W32tm /resync /force}
+
+
+if ((Get-Uptime |select Minutes|select Minutes).Minutes -le 10){Write-Host "Updating System Time" -ForegroundColor Yellow ; SYNC-TIME}
+
+function Get-LISTENERS(){
+(((netstat -ynbat|Select-String "\[*exe*"  -Context  1,0 )-replace '\[' -replace '\]' -replace '>' -split
+ '\n'  )|sort|unique |Write-Host -ForegroundColor Yellow -Separator "\n")
 }
-
-
-
 
