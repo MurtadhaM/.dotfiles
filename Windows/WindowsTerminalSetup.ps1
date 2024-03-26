@@ -83,7 +83,8 @@ $packages = @(
     "putty",
     "gh",
     "python",
-    "python3-virtualenv"
+"tftpd32",
+"bat",
     )
 # Remove already installed packages
     $packages = $packages | Where-Object {$_ -notin $winget_packages}    
