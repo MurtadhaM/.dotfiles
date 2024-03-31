@@ -172,10 +172,10 @@ function setup-autocompletion() {
     #Install-Module -Name Az.Tools.Predictor
     #install-module CompletionPredictor
     Import-Module CompletionPredictor
-    Set-PSReadLineOption -Colors @{ InlinePrediction = $PSStyle.Background.Blue }
-    Get-PSReadLineOption | Select-Object -Property PredictionSource
-    Set-PSReadLineOption -PredictionViewStyle ListView
-    Set-PSReadLineOption -Colors @{ InlinePrediction = $PSStyle.Background.Blue }
+    # Set-PSReadLineOption -Colors @{ InlinePrediction = $PSStyle.Background.Blue }
+    # Get-PSReadLineOption | Select-Object -Property PredictionSource
+    # Set-PSReadLineOption -PredictionViewStyle ListView
+    # Set-PSReadLineOption -Colors @{ InlinePrediction = $PSStyle.Background.Blue }
 }
 
 
@@ -266,16 +266,47 @@ function Init-Script() {
     Import-Module oh-my-posh
     # Set Profile
     Write-Host "Setting Profile" -ForegroundColor Green
-    Set-PoshPrompt -Theme '~\appdata\local\Programs\oh-my-posh\themes\plague.omp.json'
+    (oh-my-posh.exe init pwsh --config='~\appdata\local\Programs\oh-my-posh\themes\plague.omp.json' --print ) -join "`n"|Invoke-Expression
     Write-Host "Loading Profile" -ForegroundColor Blue
+}
+
+
+
+function SYNC-TIME(){
+# START TIME SERVICE
+START-SERVICE w32time
+#START-SERVICE tzautoupdate
+## FORCE SYNC TIME
+W32tm /resync /force
+
+}
+
+
+
+
+<# RANDOM COLOR FUNCTION #>
+function RANDOM-COLOR(){([System.ConsoleColor].DeclaredMembers)[(Get-Random -Maximum 14 -Minimum 2 -SetSeed (((Get-Date -AsUTC).Ticks)%100))].name}
+
+<# STOP SPOOLER SERVICE #>
+function STOP-PRINT-SERVICE(){
+Write-Host "STOPPING SPOOLSV.exe and its service" -ForegroundColor Red
+Stop-Service -Name Spooler -Force
+}
+
+
+<#  Function to list all the processes that are listening on the network (Must be run as Administrator) #>
+function LISTENERS(){
+     
+((NETSTAT.EXE -nba )   -split "\n" -clike "*exe*" -replace "\["  -replace "\]" |sort|unique |ForEach-Object -Process {Write-Host $_ -ForegroundColor ([System.ConsoleColor].DeclaredMembers)[(Get-Random -Maximum 14 -Minimum 2 -SetSeed (((Get-Date -AsUTC).Ticks)%100))].name })
 }
 
 
 ## MAIN
 function START-UP(){
     Write-Host "Starting Up" -ForegroundColor Green
+    Set-PSReadLineOption -PredictionSource HistoryAndPlugin
     # Check Oh-My-Posh
-    set-PoshPrompt -Theme '~\appdata\local\Programs\oh-my-posh\themes\plague.omp.json'
+    (oh-my-posh.exe init pwsh --config='~\appdata\local\Programs\oh-my-posh\themes\plague.omp.json' --print ) -join "`n"|Invoke-Expression
     # BASIC SETUP
     # Setting Keybinds
     set-PSReadLineKeyHandler -Key Ctrl+a -Function BeginningOfLine
@@ -291,21 +322,3 @@ function START-UP(){
 
 ## CALL START-UP
 START-UP
-set-alias -Name pip -Value pip.exe
-
-function SYNC-TIME(){
-# START TIME SERVICE
-START-SERVICE w32time
-#START-SERVICE tzautoupdate
-## FORCE SYNC TIME
-W32tm /resync /force}
-
-
-if ((Get-Uptime |select Minutes|select Minutes).Minutes -le 10){Write-Host "Updating System Time" -ForegroundColor Yellow ; SYNC-TIME}
-
-function RANDOM-COLOR(){([System.ConsoleColor].DeclaredMembers)[(Get-Random -Maximum 14 -Minimum 2 -SetSeed (((Get-Date -AsUTC).Ticks)%100))].name}
-
-
-function LISTENERS(){
-((NETSTAT.EXE -nba )   -split "\n" -clike "*exe*" -replace "\["  -replace "\]" |sort|unique |ForEach-Object -Process {Write-Host $_ -ForegroundColor ([System.ConsoleColor].DeclaredMembers)[(Get-Random -Maximum 14 -Minimum 2 -SetSeed (((Get-Date -AsUTC).Ticks)%100))].name })
-}
