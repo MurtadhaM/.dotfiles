@@ -269,7 +269,8 @@ function Init-Script() {
     (oh-my-posh.exe init pwsh --config='~\appdata\local\Programs\oh-my-posh\themes\plague.omp.json' --print ) -join "`n"|Invoke-Expression
     Write-Host "Loading Profile" -ForegroundColor Blue
 # SET HISTORY FILE
-set-psReadLineOption -historySavePath "C:\Users\$env:USERNAME\.dotfiles\Windows\ps_history.txt"
+#set-psReadLineOption -historySavePath "C:\Users\$env:USERNAME\.dotfiles\Windows\ps_history.txt"
+
 }
 
 
