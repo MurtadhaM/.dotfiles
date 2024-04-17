@@ -85,6 +85,7 @@ $packages = @(
     "python",
 "tftpd32",
 "bat",
+"az.powershell"
     )
 # Remove already installed packages
     $packages = $packages | Where-Object {$_ -notin $winget_packages}    
