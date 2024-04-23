@@ -303,7 +303,19 @@ function LISTENERS(){
 ((NETSTAT.EXE -nba )   -split "\n" -clike "*exe*" -replace "\["  -replace "\]" |sort|unique |ForEach-Object -Process {Write-Host $_ -ForegroundColor ([System.ConsoleColor].DeclaredMembers)[(Get-Random -Maximum 14 -Minimum 2 -SetSeed (((Get-Date -AsUTC).Ticks)%100))].name })
 }
 
+<# FUNCTION TO LOAD GH COPILOT#>
+function GH-COPILOT(){
+    # Set Profile
+    $GH_COPILOT_PROFILE = Join-Path -Path $(Split-Path -Path $PROFILE -Parent) -ChildPath "gh-copilot.ps1"
+    # Set Alias
+    gh copilot alias -- pwsh | Out-File ( New-Item -Path $GH_COPILOT_PROFILE -Force )
+    # Reload Profile
+    . $GH_COPILOT_PROFILE
+    Write-Host "GH COPILOT LOADED" -ForegroundColor Green 
+    Write-Host "FOR EXPLAINATION: > ghce 'code' " -ForegroundColor Red 
+    Write-Host "FOR SHELL COMMAND: > ghcs 'code -n'" -ForegroundColor Blue
 
+}
 ## MAIN
 function START-UP(){
     Write-Host "Starting Up" -ForegroundColor Green
@@ -320,7 +332,8 @@ function START-UP(){
     $env:EDITOR = 'notepad'
     # Set Default Browser
     $env:BROWSER = 'firefox.exe'
-
+    # GH COPILOT ALIAS
+    GH-COPILOT
 }
 
 ## CALL START-UP
