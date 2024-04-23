@@ -311,9 +311,9 @@ function GH-COPILOT(){
     gh copilot alias -- pwsh | Out-File ( New-Item -Path $GH_COPILOT_PROFILE -Force )
     # Reload Profile
     . $GH_COPILOT_PROFILE
-    Write-Host "GH COPILOT LOADED" -ForegroundColor Green 
-    Write-Host "FOR EXPLAINATION: > ghce 'code' " -ForegroundColor Red 
-    Write-Host "FOR SHELL COMMAND: > ghcs 'code -n'" -ForegroundColor Blue
+#    Write-Host "GH COPILOT LOADED" -ForegroundColor Green 
+ #   Write-Host "FOR EXPLAINATION: > ghce 'code' " -ForegroundColor Red 
+  #  Write-Host "FOR SHELL COMMAND: > ghcs 'code -n'" -ForegroundColor Blue
 
 }
 ## MAIN
