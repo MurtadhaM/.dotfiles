@@ -199,6 +199,21 @@ function INSTALL-SMART-TASKBAR(){
 }
 
 
+<# SETUP GITHUB CLI#>
+function Install-GitHubCLI(){
+
+    # Install GitHub CLI Extensions
+    gh extension install github/gh-copilot
+    # Alias for GitHub CLI
+    $GH_COPILOT_PROFILE = Join-Path -Path $(Split-Path -Path $PROFILE -Parent) -ChildPath "gh-copilot.ps1"
+    gh copilot alias -- pwsh | Out-File ( New-Item -Path $GH_COPILOT_PROFILE -Force )
+    Write-Host "🖊️ GitHub CLI Extensions Installed 👀 !" -ForegroundColor Green
+    . $GH_COPILOT_PROFILE
+    Write-Host "🖊️ GitHub CLI Aliased 👀 !" -ForegroundColor Green
+    
+}
+
+
 
 <#  INSTALL CHROMATERM#>
 function Install-Chromaterm(){
