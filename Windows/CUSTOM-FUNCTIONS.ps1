@@ -1,0 +1,8 @@
+<# ALIASES & FUNCTIONS #>
+
+
+function ALIAS(){
+
+
+
+}
