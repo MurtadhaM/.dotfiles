@@ -336,5 +336,26 @@ function START-UP(){
     GH-COPILOT
 }
 
+# POST BOOT SCRIPT
+function POST-BOOT(){
+# KILLING CORSAIR
+taskkill.exe /F /IM cors*
+# KILLING PRINT SERVICE
+STOP-PRINT-SERVICE
+# START TIME SERVICE
+SYNC-TIME
+SYNC-TIME
+# STOPING LG, TUNNELBEAR  & Corsair Services
+stop-SErvice -displayName "cors*"
+stop-SErvice -displayName "*lg*"
+STOP-SErvice -displayName "*tunne*" -Force
+# KILLING WSL
+wsl --shutdown
+}
+
+
+Write-Host "RUN POST-BOOT if this is after boot" -ForegroundColor Yellow
 ## CALL START-UP
 START-UP
+
+
