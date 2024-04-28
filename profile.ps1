@@ -333,7 +333,9 @@ function START-UP(){
     # Set Default Browser
     $env:BROWSER = 'firefox.exe'
     # GH COPILOT ALIAS
-    GH-COPILOT
+    # GH-COPILOT
+    # LOAD THE CUSTOM-FUNCTIONS FILE
+    . c:\users\$env:USERNAME\.dotfiles\Windows\CUSTOM-FUNCTIONS.ps1
 }
 
 # POST BOOT SCRIPT
@@ -357,5 +359,4 @@ wsl --shutdown
 Write-Host "RUN POST-BOOT if this is after boot" -ForegroundColor Yellow
 ## CALL START-UP
 START-UP
-
 
