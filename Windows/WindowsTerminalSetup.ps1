@@ -60,6 +60,8 @@ function Install-Choco(){
 
 }
 
+<# OH-MY-POSH THEMES ARE IN C:\Program Files (x86)\oh-my-posh\themes #>
+
 function Install-Choco-Packages(){
 
 $packages = @(

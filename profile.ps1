@@ -19,7 +19,7 @@ git config --global core.autocrlf true
 
 $Content = @'
 # Posh Setup
-oh-my-posh init pwsh --config 'C:\Users\MMARZ\AppData\Local\oh-my-posh\craver.omp.json' | Invoke-Expression
+oh-my-posh init pwsh --config 'C:\Users\MMARZ\AppData\Local\oh-my-posh\microverse-power.omp.json'|Invoke-Expression
 # Completion
 oh-my-posh completion powershell | Out-String | Invoke-Expression
 # Setting Keybinds
@@ -266,8 +266,7 @@ function Init-Script() {
     Import-Module oh-my-posh
     # Set Profile
     Write-Host "Setting Profile" -ForegroundColor Green
-    (oh-my-posh.exe init pwsh --config='~\appdata\local\Programs\oh-my-posh\themes\plague.omp.json' --print ) -join "`n"|Invoke-Expression
-    Write-Host "Loading Profile" -ForegroundColor Blue
+oh-my-posh init pwsh --config 'C:\Users\MMARZ\AppData\Local\oh-my-posh\microverse-power.omp.json'|Invoke-Expression    Write-Host "Loading Profile" -ForegroundColor Blue
 # SET HISTORY FILE
 #set-psReadLineOption -historySavePath "C:\Users\$env:USERNAME\.dotfiles\Windows\ps_history.txt"
 
@@ -321,8 +320,7 @@ function START-UP(){
     Write-Host "Starting Up" -ForegroundColor Green
     Set-PSReadLineOption -PredictionSource HistoryAndPlugin
     # Check Oh-My-Posh
-    (oh-my-posh.exe init pwsh --config='~\appdata\local\Programs\oh-my-posh\themes\plague.omp.json' --print ) -join "`n"|Invoke-Expression
-    # BASIC SETUP
+oh-my-posh init pwsh --config 'C:\Users\MMARZ\AppData\Local\oh-my-posh\microverse-power.omp.json'|Invoke-Expression    # BASIC SETUP
     # Setting Keybinds
     set-PSReadLineKeyHandler -Key Ctrl+a -Function BeginningOfLine
     set-PSReadLineKeyHandler -Key Ctrl+e -Function EndOfLine
