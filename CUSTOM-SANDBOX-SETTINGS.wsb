@@ -1,0 +1,29 @@
+<vGPU>True</vGPU>
+
+<Networking>Enable</Networking>
+
+<MappedFolders>
+  <MappedFolder>
+    <HostFolder>C:\Windows\TEMP</HostFolder>
+    <SandboxFolder>C:\Windows\TEMP</SandboxFolder>
+    <ReadOnly>False</ReadOnly>
+  </MappedFolder>
+  </MappedFolders>
+
+
+
+<LogonCommand>
+  <Command>powershell.exe</Command>
+</LogonCommand>
+
+<AudioInput>True</AudioInput>
+
+<VideoInput>True</VideoInput>
+
+<ProtectedClient>True</ProtectedClient>
+
+<PrinterRedirection>True</PrinterRedirection>
+
+<ClipboardRedirection>True</ClipboardRedirection>
+
+<MemoryInMB>8096</MemoryInMB>
