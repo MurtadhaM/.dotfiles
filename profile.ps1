@@ -19,7 +19,7 @@ git config --global core.autocrlf true
 
 $Content = @'
 # Posh Setup
-oh-my-posh init pwsh --config 'C:\Users\MMARZ\AppData\Local\oh-my-posh\microverse-power.omp.json'|Invoke-Expression
+oh-my-posh init pwsh --config 'C:\Users\MMARZ\AppData\Local\oh-my-posh\iterm2.omp.json'|Invoke-Expression
 # Completion
 oh-my-posh completion powershell | Out-String | Invoke-Expression
 # Setting Keybinds
@@ -320,7 +320,8 @@ function START-UP(){
     Write-Host "Starting Up" -ForegroundColor Green
     Set-PSReadLineOption -PredictionSource HistoryAndPlugin
     # Check Oh-My-Posh
-oh-my-posh init pwsh --config 'C:\Users\MMARZ\AppData\Local\oh-my-posh\microverse-power.omp.json'|Invoke-Expression    # BASIC SETUP
+#oh-my-posh init pwsh --config 'C:\Users\MMARZ\AppData\Local\oh-my-posh\iterm2.omp.json'|Invoke-Expression    # BASIC SETUP
+oh-my-posh init pwsh --config 'C:\Users\MMARZ\AppData\Local\Programs\oh-my-posh\themes\iterm2.omp.json' | Invoke-Expression
     # Setting Keybinds
     set-PSReadLineKeyHandler -Key Ctrl+a -Function BeginningOfLine
     set-PSReadLineKeyHandler -Key Ctrl+e -Function EndOfLine
@@ -357,4 +358,4 @@ wsl --shutdown
 Write-Host "RUN POST-BOOT if this is after boot" -ForegroundColor Yellow
 ## CALL START-UP
 START-UP
-
+oh-my-posh init pwsh --config 'C:\Users\MMARZ\AppData\Local\oh-my-posh\iterm2.omp.json'|Invoke-Expression
