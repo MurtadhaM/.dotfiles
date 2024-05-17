@@ -266,7 +266,7 @@ function Init-Script() {
     Import-Module oh-my-posh
     # Set Profile
     Write-Host "Setting Profile" -ForegroundColor Green
-oh-my-posh init pwsh --config 'C:\Users\MMARZ\AppData\Local\oh-my-posh\microverse-power.omp.json'|Invoke-Expression    Write-Host "Loading Profile" -ForegroundColor Blue
+oh-my-posh init pwsh --config 'C:\Users\MMARZ\AppData\Local\oh-my-posh\iterm2.omp.json'|Invoke-Expression    Write-Host "Loading Profile" -ForegroundColor Blue
 # SET HISTORY FILE
 #set-psReadLineOption -historySavePath "C:\Users\$env:USERNAME\.dotfiles\Windows\ps_history.txt"
 
