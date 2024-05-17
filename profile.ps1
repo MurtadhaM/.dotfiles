@@ -320,7 +320,7 @@ function START-UP(){
     Write-Host "Starting Up" -ForegroundColor Green
     Set-PSReadLineOption -PredictionSource HistoryAndPlugin
     # Check Oh-My-Posh
-oh-my-posh init pwsh --config 'C:\Users\MMARZ\AppData\Local\oh-my-posh\microverse-power.omp.json'|Invoke-Expression    # BASIC SETUP
+    #oh-my-posh init pwsh --config 'C:\Users\MMARZ\AppData\Local\oh-my-posh\microverse-power.omp.json'|Invoke-Expression    # BASIC SETUP
     # Setting Keybinds
     set-PSReadLineKeyHandler -Key Ctrl+a -Function BeginningOfLine
     set-PSReadLineKeyHandler -Key Ctrl+e -Function EndOfLine
@@ -357,3 +357,4 @@ wsl --shutdown
 Write-Host "RUN POST-BOOT if this is after boot" -ForegroundColor Yellow
 ## CALL START-UP
 START-UP
+oh-my-posh init pwsh --config 'C:\Users\MMARZ\AppData\Local\oh-my-posh\iterm2.omp.json'|Invoke-Expression    # BASIC SETUP
