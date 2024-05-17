@@ -333,7 +333,7 @@ function START-UP(){
     # GH COPILOT ALIAS
     # GH-COPILOT
     # LOAD THE CUSTOM-FUNCTIONS FILE
-    . c:\users\$env:USERNAME\.dotfiles\Windows\CUSTOM-FUNCTIONS.ps1
+    . c:\users\$env:USERNAME\.dotfiles\CUSTOM-FUNCTIONS.ps1
 }
 
 # POST BOOT SCRIPT
