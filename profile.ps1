@@ -19,6 +19,22 @@ set-PSReadLineKeyHandler -Key Ctrl+k -Function KillLine
 $env:EDITOR = 'nodepad.exe'
 # Set Default Browser
 $env:BROWSER = 'chrome.exe'
+Import-Module CompletionPredictor
+Set-PSReadLineOption -PredictionSource HistoryAndPlugin
+Set-PSReadLineOption -PredictionViewStyle InlineView
+Set-PSReadLineOption -MaximumHistoryCount 10000
+Set-PSReadLineOption -MaximumKillRingCount 10000
+Set-PSReadLineOption -HistoryNoDuplicates 
+Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+# Colorize Predictions
+Set-PSReadLineKeyHandler -Key Tab -Function Complete
+Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+Set-PSReadLineKeyHandler -Key Ctrl+Space -Function MenuComplete
+Set-PSReadLineKeyHandler -Key Ctrl+R -Function ReverseSearchHistory
+Set-PSReadLineKeyHandler -Key Ctrl+Shift+R -Function ForwardSearchHistory
+Set-PSReadLineKeyHandler -Key Ctrl+Shift+Space -Function MenuComplete
 
 function Beta_Clear() {
     # Remove Google Chrome Beta, Remove Cache, and Reinstall Google Chrome Beta
@@ -138,6 +154,9 @@ if (!(test-path ~\.dotfiles)) {
     cd ~
     git clone $url
     # Set Profile
+    #Checkout Windows Branch
+    cd ~\.dotfiles
+    git checkout Windows
     $PROFILE.CurrentUserCurrentHost=~\.dotfiles\profile.ps1
 
 }else {
@@ -171,36 +190,6 @@ function UPLOAD-PROFILE(){
     # Reload Profile
     $PROFILE
 }
-
-
-function GET-ENVIRONMENT-PATH(){
-    Write-Host "Environment Path: $env:PATH" -ForegroundColor Green
-    Write-Host "Environment Path: $env:PSModulePath" -ForegroundColor Green
-}
-
-function ADD-ENVIRONMENT-PATH($path) {
-    $env:PATH += ";$path"
-    $env:PSModulePath += ";$path"
-}
-
-function Init-Script() {
-    # Get Profile
-    Write-Host "Checking Profile" -ForegroundColor Green
-    Get-Profile
-    # Auto-Completion
-    Write-Host "Setting Up Auto-Completion" -ForegroundColor Green
-    SETUP-AUTOCOMPLETION
-    Import-Module CompletionPredictor
-    # Oh-My-Posh
-    Write-Host "Setting Up Oh-My-Posh" -ForegroundColor Green
-    Install-Module oh-my-posh -Scope CurrentUser -Force
-    # Import-Module oh-my-posh
-    Import-Module oh-my-posh
-    # Set Profile
-    Write-Host "Setting Profile" -ForegroundColor Green
-oh-my-posh init pwsh --config '$env:USERNAME\AppData\Local\oh-my-posh\iterm2.omp.json'|Invoke-Expression    Write-Host "Loading Profile" -ForegroundColor Blue
-}
-
 
 
 function SYNC-TIME(){
