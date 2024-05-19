@@ -31,10 +31,8 @@ Set-PSReadLineKeyHandler -Key Tab -Function Complete
 Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
 Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
-Set-PSReadLineKeyHandler -Key Ctrl+Space -Function MenuComplete
 Set-PSReadLineKeyHandler -Key Ctrl+R -Function ReverseSearchHistory
 Set-PSReadLineKeyHandler -Key Ctrl+Shift+R -Function ForwardSearchHistory
-Set-PSReadLineKeyHandler -Key Ctrl+Shift+Space -Function MenuComplete
 
 function Beta_Clear() {
     # Remove Google Chrome Beta, Remove Cache, and Reinstall Google Chrome Beta
