@@ -1,184 +1,116 @@
-### INTERESTING PROFILE HERE ---
-#  https://raw.githubusernt.com/ChrisTitusTech/powershell-profile/main/Microsoft.PowerShell_profile.ps1
-#--------------------------------------------------
-
-# Mintty
-
-# Set Bash to point to mintty to prevent WSL from opening in Windows Terminal
-Set-Alias bash mintty
-
+<# .SYNOPSIS #>
+<# This is the profile script for PowerShell. for Murtadha Marzouq#>
+<# .DESCRIPTION #>
+<# This script is used to set up the PowerShell environment for Murtadha Marzouq#>
+<# .NOTES #>
+<# Filename: profile.ps1 #>
 
 # Global Variables
 $PSDefaultParameterValues['*:Out-File:Encoding'] = 'utf8'
 $PSDefaultParameterValues['*:Set-Content:Encoding'] = 'utf8'
 $PSDefaultParameterValues['*:Export-Csv:Encoding'] = 'utf8'
 $PSDefaultParameterValues['*:Import-Csv:Encoding'] = 'utf8'
-
-# GIT ENDOF LINE
-git config --global core.autocrlf true
-
-$Content = @'
-# Posh Setup
-oh-my-posh init pwsh --config 'C:\Users\MMARZ\AppData\Local\oh-my-posh\microverse-power.omp.json'|Invoke-Expression
-# Completion
-oh-my-posh completion powershell | Out-String | Invoke-Expression
 # Setting Keybinds
 set-PSReadLineKeyHandler -Key Ctrl+a -Function BeginningOfLine
 set-PSReadLineKeyHandler -Key Ctrl+e -Function EndOfLine
 #  delete the whole line
 set-PSReadLineKeyHandler -Key Ctrl+k -Function KillLine
 # Set Default Editor
-$env:EDITOR = 'code -w'
+$env:EDITOR = 'nodepad.exe'
 # Set Default Browser
-$env:BROWSER = 'firefox.exe'
-'@
-
-
-
-
-
-# POSH Setup
-function install_tools() {
-    winget install --id Microsoft.PowerShell --source winget
-    winget install --id Microsoft.PowerShell.Preview --source winget
-    winget install posh git oh-my-posh
-}
-
-function install_fonts() {
-    cd $HOME\Downloads
-    # Download Fonts Installer
-
-}
-
-function profile_prep() {
-
-    # test if C:\Windows\System32\WindowsPowerShell\v1.0\profile.ps1 exists
-    if (!(Test-Path -Path $PROFILE )) {
-        # Check if directory exists
-        if (!(Test-Path -Path "$HOME\Documents\WindowsPowerShell" )) {
-            # Create A Directory
-            New-Item -ItemType Directory -Path "$HOME\Documents\WindowsPowerShell" -Force
-            # Create Profile
-            New-Item -ItemType File -Path $PROFILE -Force
-            # Write Content to Profile
-            $Content | Out-File -FilePath $PROFILE -Encoding utf8 -Force
-
-            $PROFILE = "$HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
-            #Reload Profile
-            . $PROFILE
-
-
-
-        }
-        else {
-            # Create A Directory
-            $Content | Out-File -FilePath "$HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Encoding utf8 -Force
-            $PROFILE = "$HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
-            #Reload Profile
-            . $PROFILE
-
-        }
-
-    }
-    else {
-        # Execute Content
-        $Content | Out-File -FilePath $PROFILE -Encoding utf8 -Force
-        $PROFILE = "$HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
-        #Reload Profile
-        . $PROFILE
-
-    }
-}
-
-function profile_setup() {
-    # Set Profile
-    Write-Host "Setting Profile"
-    # Set $PROFILE to $HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
-    $PROFILE = "$HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
-    # Set Execution Policy
-    # Install Tools
-    install_tools
-
-}
-
-function wsl_prep() {
-
-    # WSL IMPOROVEMENTS
-    Set-Location ~
-    # Set Default Editor
-    $env:EDITOR = 'code -w'
-    # Set Default Browser
-    $env:BROWSER = 'firefox.exe'
-    # Network Config Bridge
-    $ModuleName = "Wsl-IpHandler"
-    $outFile = "$ModuleName.zip"
-    Invoke-WebRequest -Uri https://codeload.github.com/wikiped/Wsl-IpHandler/zip/refs/heads/master -OutFile $outFile
-    Expand-Archive -Path $outFile -DestinationPath '.' -Force
-    Remove-Item -Path $outFile
-    Rename-Item -Path "${ModuleName}-master" -NewName $ModuleName -Force
-    Set-Location $ModuleName
-    .\install.ps1
-    Set-Location ~
-}
-
-
-
-
-function SHOW_SPIES() { netstat -anob | findstr exe  | unique | sort | unique }
-function ssh_to_switch() { 'ssh root@172.16.0.3 -o KexAlgorithms=diffie-hellman-group1-sha1 -o HostKeyAlgorithms=ssh-rsa -oCiphers=aes256-cbc  -m hmac-sha1-96' }
+$env:BROWSER = 'chrome.exe'
 
 function Beta_Clear() {
-    # Delete  Chrome Beta
-    winget uninstall --id Google.Chrome.Beta --source winget
-
-    # Remove Chrome Beta Directory
-    Remove-Item -Path "C:\Program Files (x86)\Google\Chrome Beta" -Recurse -Force -ErrorAction SilentlyContinue
-
-    # Remove Chrome Beta Directory
-    Remove-Item -Path "$HOME\AppData\Local\Google\Chrome Beta" -Recurse -Force -ErrorAction SilentlyContinue
-
-    # Install Chrome Beta MSI Installer
-    msiexec /i "C:\Users\MMARZ\ONE\OneDrive\Documents\APPS\ChromeBeta.msi" /norestart
+    # Remove Google Chrome Beta, Remove Cache, and Reinstall Google Chrome Beta
+    winget uninstall --name "Google Chrome Beta" --force --purge;
+    Remove-Item 'C:\Program Files (x86)\Google' -Force -Recurse -ErrorAction Ignore;
+    Remove-Item '$env:USER\AppData\Local\Google\Chrome Beta' -Force -Recurse -ErrorAction Ignore;
+    winget install --name "Google Chrome Beta"
 }
 
 
-function setup-autocompletion() {
+function SETUP-AUTOCOMPLETION() {
+# CHECK IF   CompletionPredictor MODULE IS INSTALLED
+IF (!(Get-Module -Name CompletionPredictor -ListAvailable)) {
+    Write-Host "Installing CompletionPredictor Module" -ForegroundColor Green
+    Install-Module CompletionPredictor -Force
+}
 
-    Register-ArgumentCompleter -Native -CommandName az -ScriptBlock {
-        param($commandName, $wordToComplete, $cursorPosition)
-        $completion_file = New-TemporaryFile
-        $env:ARGCOMPLETE_USE_TEMPFILES = 1
-        $env:_ARGCOMPLETE_STDOUT_FILENAME = $completion_file
-        $env:COMP_LINE = $wordToComplete
-        $env:COMP_POINT = $cursorPosition
-        $env:_ARGCOMPLETE = 1
-        $env:_ARGCOMPLETE_SUPPRESS_SPACE = 0
-        $env:_ARGCOMPLETE_IFS = "`n"
-        $env:_ARGCOMPLETE_SHELL = 'powershell'
-        az 2>&1 | Out-Null
-        Get-Content $completion_file | Sort-Object | ForEach-Object {
-            [System.Management.Automation.CompletionResult]::new($_, $_, "ParameterValue", $_)
-        }
-        Remove-Item $completion_file, Env:\_ARGCOMPLETE_STDOUT_FILENAME, Env:\ARGCOMPLETE_USE_TEMPFILES, Env:\COMP_LINE, Env:\COMP_POINT, Env:\_ARGCOMPLETE, Env:\_ARGCOMPLETE_SUPPRESS_SPACE, Env:\_ARGCOMPLETE_IFS, Env:\_ARGCOMPLETE_SHELL
+# Check if the history file below 100 lines
+IF ((Get-Content C:\Users\$env:USERNAME\APPDATA\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt).Count -lt 100) {
+    Write-Host "Downloading History File" -ForegroundColor Green
+    # Download History File
+    $url = "https://raw.githubusercontent.com/MurtadhaM/.dotfiles/Windows/ConsoleHost_history.txt.enc"
+    $ENCRYPTED_FILE = "C:\Users\$env:USERNAME\APPDATA\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt.enc"
+    $DECRYPTED_FILE = "C:\Users\$env:USERNAME\APPDATA\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
+    Invoke-WebRequest -Uri $url -OutFile $ENCRYPTED_FILE
+    # Decrypt File
+    DECRYPT-FILE $ENCRYPTED_FILE $DECRYPTED_FILE
+    # Import File
+    Get-Content $DECRYPTED_FILE | Add-Content $env:USERNAME\APPDATA\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+    # Remove Temp Files
+    Remove-Item -Path $ENCRYPTED_FILE -Force
+    Write-Host "History File Downloaded" -ForegroundColor Green
+}
+
+# Set Prediction Source
+Import-Module CompletionPredictor
+Set-PSReadLineOption -PredictionSource HistoryAndPlugin
+Set-PSReadLineOption -PredictionViewStyle InlineView
+Set-PSReadLineOption -MaximumHistoryCount 10000
+Set-PSReadLineOption -MaximumKillRingCount 10000
+Set-PSReadLineOption -HistoryNoDuplicates 
+Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+# Colorize Predictions
+Set-PSReadLineKeyHandler -Key Tab -Function Complete
+Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+Set-PSReadLineKeyHandler -Key Ctrl+Space -Function MenuComplete
+Set-PSReadLineKeyHandler -Key Ctrl+R -Function ReverseSearchHistory
+Set-PSReadLineKeyHandler -Key Ctrl+Shift+R -Function ForwardSearchHistory
+Set-PSReadLineKeyHandler -Key Ctrl+Shift+Space -Function MenuComplete
+}
+
+
+
+<# ENCRYPT FILE FUNCTION#>
+function ENCRYPT-FILE($INPUT_FILE,$OUTPUT) {
+    Write-Host $INPUT_FILE  -ForegroundColor GREEN;
+    Write-Host $OUTPUT OUTPUT FILE -ForegroundColor RED;
+    IF($INPUT_FILE -eq $null -or $OUTPUT -eq $null -or $INPUT_FILE -eq "" -or $OUTPUT -eq "") {
+        Write-Host "Please Provide a File to Encrypt and a File to Save the Encrypted File" -ForegroundColor Red
+        Write-Host "Example: ENCRYPT-FILE -DECRYPTED_FILE 'C:\Users\$env:USERNAME\APPDATA\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt' -ENCRYPTED_FILE 'C:\Users\$env:USERNAME\APPDATA\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt.enc'" -ForegroundColor Yellow
+        return    
     }
-
-
-    Import-Module Az.Tools.Predictor
-    Set-PSReadLineOption -PredictionSource HistoryAndPlugin
-    Import-Module Az.Tools.Predictor
-    Set-PSReadLineOption -PredictionSource HistoryAndPlugin
-
-
-    #Install-Module -Name Az.Tools.Predictor
-    #install-module CompletionPredictor
-    Import-Module CompletionPredictor
-    # Set-PSReadLineOption -Colors @{ InlinePrediction = $PSStyle.Background.Blue }
-    # Get-PSReadLineOption | Select-Object -Property PredictionSource
-    # Set-PSReadLineOption -PredictionViewStyle ListView
-    # Set-PSReadLineOption -Colors @{ InlinePrediction = $PSStyle.Background.Blue }
+    # Check if File Exists
+    IF(!(Test-Path $INPUT_FILE)) {
+        Write-Host "File Not Found" -ForegroundColor Red
+        return
+    }
+    # Encrypt File
+    Write-Host "Encrypting File" -ForegroundColor Green
+    openssl.exe enc -aes-256-cbc -in $INPUT_FILE -out $OUTPUT -pbkdf2
+    Write-Host "Encrypted File: $OUTPUT" -ForegroundColor Green
 }
 
-
+<# DECRYPT FILE FUNCTION#>
+function DECRYPT-FILE($INPUT_FILE,$OUTPUT) {
+    IF($OUTPUT -eq $null -or $INPUT_FILE -eq $null -or $OUTPUT -eq "" -or $INPUT_FILE -eq "") {
+        Write-Host "Please Provide a File to Decrypt and a File to Save the Decrypted File" -ForegroundColor Red
+        Write-Host "Example: DECRYPT-FILE -ENCRYPTED_FILE 'C:\Users\$env:USERNAME\APPDATA\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt.enc' -DECRYPTED_FILE 'C:\Users\$env:USERNAME\APPDATA\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt'" -ForegroundColor Yellow
+        return    
+    }
+    # Check if File Exists
+    IF(!(Test-Path $INPUT_FILE)) {
+        Write-Host "File Not Found" -ForegroundColor Red
+        return
+    }
+    # Decrypt File
+    Write-Host "Decrypting File" -ForegroundColor Green
+    openssl.exe enc -aes-256-cbc -d -in $INPUT_FILE -out $OUTPUT -pbkdf2
+    Write-Host "Decrypted File: $OUTPUT" -ForegroundColor Green
+}
 
 function Delete-Cache() {
     # Remove Temp Files
@@ -257,7 +189,7 @@ function Init-Script() {
     Get-Profile
     # Auto-Completion
     Write-Host "Setting Up Auto-Completion" -ForegroundColor Green
-    setup-autocompletion
+    SETUP-AUTOCOMPLETION
     Import-Module CompletionPredictor
     # Oh-My-Posh
     Write-Host "Setting Up Oh-My-Posh" -ForegroundColor Green
@@ -266,10 +198,7 @@ function Init-Script() {
     Import-Module oh-my-posh
     # Set Profile
     Write-Host "Setting Profile" -ForegroundColor Green
-oh-my-posh init pwsh --config 'C:\Users\MMARZ\AppData\Local\oh-my-posh\iterm2.omp.json'|Invoke-Expression    Write-Host "Loading Profile" -ForegroundColor Blue
-# SET HISTORY FILE
-#set-psReadLineOption -historySavePath "C:\Users\$env:USERNAME\.dotfiles\Windows\ps_history.txt"
-
+oh-my-posh init pwsh --config '$env:USERNAME\AppData\Local\oh-my-posh\iterm2.omp.json'|Invoke-Expression    Write-Host "Loading Profile" -ForegroundColor Blue
 }
 
 
@@ -320,8 +249,8 @@ function START-UP(){
     Write-Host "Starting Up" -ForegroundColor Green
     Set-PSReadLineOption -PredictionSource HistoryAndPlugin
     # Check Oh-My-Posh
-    #oh-my-posh init pwsh --config 'C:\Users\MMARZ\AppData\Local\oh-my-posh\microverse-power.omp.json'|Invoke-Expression    # BASIC SETUP
-    oh-my-posh init pwsh --config 'C:\Users\MMARZ\AppData\Local\Programs\oh-my-posh\themes\iterm2.omp.json' | Invoke-Expression
+    #oh-my-posh init pwsh --config '$env:USERNAME\AppData\Local\oh-my-posh\microverse-power.omp.json'|Invoke-Expression    # BASIC SETUP
+    oh-my-posh init pwsh --config '$env:USERNAME\AppData\Local\Programs\oh-my-posh\themes\iterm2.omp.json' | Invoke-Expression
     # Setting Keybinds
     set-PSReadLineKeyHandler -Key Ctrl+a -Function BeginningOfLine
     set-PSReadLineKeyHandler -Key Ctrl+e -Function EndOfLine

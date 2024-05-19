@@ -60,8 +60,6 @@ function Install-Choco(){
 
 }
 
-<# OH-MY-POSH THEMES ARE IN C:\Program Files (x86)\oh-my-posh\themes #>
-
 function Install-Choco-Packages(){
 
 $packages = @(
@@ -241,6 +239,28 @@ function Install-Chromaterm(){
     copy-Item -Path $HOME\.chromaterm.yml -Destination $env:APPDATA\chromaterm.yml
 }
 
+<# WINDOWS SETTINGS#>
+function Windows-Settings(){
+    # Set Dark Mode
+    Write-Host "Setting Dark Mode" -ForegroundColor Green
+    New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0 -PropertyType DWORD -Force
+    New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name SystemUsesLightTheme -Value 0 -PropertyType DWORD -Force
+    # Set Windows Terminal as Default Terminal
+    Write-Host "Setting Windows Terminal as Default Terminal" -ForegroundColor Green
+    New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\wt.exe -Name "" -Value "C:\Program Files\WindowsApps\Microsoft.WindowsTerminal_1.9.1942.0_x64__8wekyb3d8bbwe\wt.exe" -PropertyType String -Force
+    # Disable Taskbar Search Box 
+    Write-Host "Disabling Taskbar Search Box" -ForegroundColor Green
+    New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search -Name SearchboxTaskbarMode -Value 0 -PropertyType DWORD -Force
+    # Disable Taskbar News and Interests
+    Write-Host "Disabling Taskbar News and Interests" -ForegroundColor Green
+    New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Feeds -Name "FlightContent" -Value 0 -PropertyType DWORD -Force
+    # Clear Start Menu Tiles 
+    Write-Host "Clearing StartMenu Pins" -ForegroundColor Green
+    Remove-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache\DefaultAccount -Name "StartLayoutCache" -Force
+    
+
+}
+  
 <# INSTALL ALL#>
 function Install-All(){
     <#Set Execution Policy#> 
@@ -273,4 +293,7 @@ function Install-All(){
     Write-Host "🖊️ INSTALL CHROMATERM " -ForegroundColor Green
     Install-Chromaterm
 } 
+
+
+
 Install-All
