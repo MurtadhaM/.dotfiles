@@ -85,7 +85,9 @@ $packages = @(
     "python",
 "tftpd32",
 "bat",
-"az.powershell"
+"az.powershell",
+"nerdfont-hack",
+"font-nerd-DejaVuSansMono"
     )
 # Remove already installed packages
     $packages = $packages | Where-Object {$_ -notin $winget_packages}    
@@ -123,27 +125,6 @@ function Install-MSYS2(){
 
 }
 
-<# INSTALL Chromaterm#>
-function Install-Chromaterm(){
-    # CHECK IF PYTHON IS INSTALLED
-    $python = Get-Command python -ErrorAction SilentlyContinue
-    if ($python -eq $null) {
-        Write-Host "Python is not installed" -ForegroundColor Red
-        Write-Host "Installing Python" -ForegroundColor Green
-        choco install python -y
-    }
-    else{
-        Write-Host "Python is already installed" -ForegroundColor Green
-    }
-    # INSTALL CHROMATERM USING PIP
-    pip install https://github.com/hSaria/ChromaTerm/archive/refs/heads/windows.zip
-    Write-Host "🖊️ Chromaterm Installed 👀 !" -ForegroundColor Green
-    # DOWNLOAD CHROMATERM CONFIG
-    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MurtadhaM/Infrastructure/main/Administration/Colorize%20CLI/chromaterm.yml" -OutFile $HOME\.chromaterm.yml
-    # MOVE CHROMATERM CONFIG TO APPDATA
-    Write-Host "🖊️ Chromaterm Config Installed 👀 !" -ForegroundColor Green
-    copy-Item -Path $HOME\.chromaterm.yml -Destination $env:APPDATA\chromaterm.yml
-}
 
 <# INSTALL WSL2#>
 function Install-WSL2(){
@@ -228,16 +209,19 @@ function Install-Chromaterm(){
         Write-Host "Python is already installed" -ForegroundColor Green
     }
     # INSTALL CHROMATERM USING PIP
-    pip install https://github.com/hSaria/ChromaTerm/archive/refs/heads/windows.zip
+    python3.12.exe pip install https://github.com/hSaria/ChromaTerm/archive/refs/heads/windows.zip
     Write-host "Warning: CHANGE LINE nano +290 to nano +291 in chromaterm.py" -ForegroundColor Yellow
+    # IMPORTANT FIX FOR CHROMATERM
+    Write-Host "🖊️ Fixing Chromaterm" -ForegroundColor Green
+    (Get-Content C:\python312\Lib\site-packages\chromaterm\__main__.py  -Raw -Encoding String).Replace("except io.UnsupportedOperation","except")|Out-File C:\python312\Lib\site-packages\chromaterm\__main__.py -Encoding utf8
     Write-Host "🖊️ Chromaterm Installed 👀 !" -ForegroundColor Green
     # DOWNLOAD CHROMATERM CONFIG
     Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MurtadhaM/Infrastructure/main/Administration/Colorize%20CLI/chromaterm.yml" -OutFile $HOME\.chromaterm.yml
-
     # MOVE CHROMATERM CONFIG TO APPDATA
     Write-Host "🖊️ Chromaterm Config Installed 👀 !" -ForegroundColor Green
     copy-Item -Path $HOME\.chromaterm.yml -Destination $env:APPDATA\chromaterm.yml
 }
+
 
 <# WINDOWS SETTINGS#>
 function Windows-Settings(){
@@ -246,17 +230,12 @@ function Windows-Settings(){
     New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0 -PropertyType DWORD -Force
     New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name SystemUsesLightTheme -Value 0 -PropertyType DWORD -Force
     # Set Windows Terminal as Default Terminal
-    Write-Host "Setting Windows Terminal as Default Terminal" -ForegroundColor Green
-    New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\wt.exe -Name "" -Value "C:\Program Files\WindowsApps\Microsoft.WindowsTerminal_1.9.1942.0_x64__8wekyb3d8bbwe\wt.exe" -PropertyType String -Force
     # Disable Taskbar Search Box 
     Write-Host "Disabling Taskbar Search Box" -ForegroundColor Green
     New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search -Name SearchboxTaskbarMode -Value 0 -PropertyType DWORD -Force
     # Disable Taskbar News and Interests
     Write-Host "Disabling Taskbar News and Interests" -ForegroundColor Green
     New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Feeds -Name "FlightContent" -Value 0 -PropertyType DWORD -Force
-    # Clear Start Menu Tiles 
-    Write-Host "Clearing StartMenu Pins" -ForegroundColor Green
-    Remove-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache\DefaultAccount -Name "StartLayoutCache" -Force
     
 
 }
@@ -272,6 +251,9 @@ function Install-All(){
     <# INSTALL ALL CHOCO PACKAGES#>
     Write-Host "Installing Choco Packages" -ForegroundColor Green 
     Install-Choco-Packages
+    <# INSTALL WINGET#>
+    Write-Host "Installing Winget" -ForegroundColor Blue
+    Install-Winget
     <# INSTALL MSYS2#>
     Write-Host "Installing MSYS2" -ForegroundColor Blue
     Install-MSYS2
