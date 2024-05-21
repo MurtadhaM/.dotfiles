@@ -18,7 +18,7 @@ function Install-Chocolatey {
     Write-Host "Adding Chocolatey to PATH" -ForegroundColor Yellow
     $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User") ;
     [System.Environment]::SetEnvironmentVariable("Path", $env:Path, "Machine") ;
-}
+} 
 
 
 # INSTALL PORTABLE PACKAGES
