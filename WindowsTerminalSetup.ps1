@@ -70,6 +70,7 @@ $packages = @(
     "wget",
     "Microsoft.WindowsTerminal",
     "powertoys",
+    "grep",
     "nmap",
     "vlc",
     "oh-my-posh",
@@ -87,7 +88,8 @@ $packages = @(
 "bat",
 "az.powershell",
 "nerdfont-hack",
-"font-nerd-DejaVuSansMono"
+"font-nerd-DejaVuSansMono",
+"nano"
     )
 # Remove already installed packages
     $packages = $packages | Where-Object {$_ -notin $winget_packages}    
