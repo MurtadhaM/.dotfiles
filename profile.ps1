@@ -44,7 +44,7 @@ function Beta_Clear() {
     # Remove Google Chrome Beta, Remove Cache, and Reinstall Google Chrome Beta
     winget uninstall --name "Google Chrome Beta" --force --purge;
     Remove-Item 'C:\Program Files (x86)\Google' -Force -Recurse -ErrorAction Ignore;
-    Remove-Item 'C:\Users\$env:USER\AppData\Local\Google\Chrome Beta' -Force -Recurse -ErrorAction Ignore;
+    Remove-Item 'C:\Users\$env:USERNAME\AppData\Local\Google\Chrome Beta' -Force -Recurse -ErrorAction Ignore;
     winget install --name "Google Chrome Beta"
 }
 
