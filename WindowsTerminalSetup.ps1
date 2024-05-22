@@ -117,6 +117,8 @@ function Install-MSYS2(){
     if ($msys2 -eq $true) {
         # Add MSYS2 to PATH
         $env:Path += ";C:\msys64\usr\bin\"
+        $env:Path += ";C:\msys64\ucrt64\bin\"
+        $env:Path += ";C:\msys64\mingw64\bin\"
         # Set Alias for bash is MSYS2
         set-alias bash 'C:\msys64\usr\bin\'
         Write-Host "🖊️ MSYS2 Installed 👀 !" -ForegroundColor Green
