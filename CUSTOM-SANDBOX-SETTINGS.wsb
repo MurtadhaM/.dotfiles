@@ -4,8 +4,8 @@
 
 <MappedFolders>
   <MappedFolder>
-    <HostFolder>C:\Windows\TEMP</HostFolder>
-    <SandboxFolder>C:\Windows\TEMP</SandboxFolder>
+    <HostFolder>F:\\</HostFolder>
+    <SandboxFolder>F:\\</SandboxFolder>
     <ReadOnly>False</ReadOnly>
   </MappedFolder>
   </MappedFolders>

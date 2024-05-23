@@ -1,4 +1,4 @@
-{
+ {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
     "actions": 
@@ -224,7 +224,7 @@
             "backgroundImage": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3ABlack_Wallpaper.jpg&psig=AOvVaw0-B4Cc1kJ9ovMv7O9C2R3A&ust=1716348057994000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCLi2x_bknYYDFQAAAAAdAAAAABAJ",
             "backgroundImageOpacity": 0.0,
             "colorScheme": "Tango Dark",
-            "elevate": true,
+            "elevate": false,
             "font": 
             {
                 "face": "DejaVuSansM Nerd Font Mono",
@@ -244,23 +244,30 @@
         "list": 
         [
             {
-                "backgroundImage": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3ABlack_Wallpaper.jpg&psig=AOvVaw0-B4Cc1kJ9ovMv7O9C2R3A&ust=1716348057994000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCLi2x_bknYYDFQAAAAAdAAAAABAJ",
-                "backgroundImageOpacity": 0.85,
-                "backgroundImageStretchMode": "fill",
-                "colorScheme": "Tango Dark",
+                "backgroundImage": "C:\\Users\\MMARZ\\OneDrive\\Pictures\\SlideSHow\\The Fire Keeper.gif",
+                "backgroundImageOpacity": 0.21,
+                "backgroundImageStretchMode": "uniformToFill",
+                "colorScheme": "Vintage",
                 "commandline": "pwsh",
                 "cursorShape": "filledBox",
+                "experimental.retroTerminalEffect": false,
+                "font": 
+                {
+                    "face": "DejaVuSansM Nerd Font Mono"
+                },
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
                 "icon": "https://cdn2.iconfinder.com/data/icons/flat-rounded-icons/48/ico-27-2-512.png",
                 "name": "Windows PowerShell",
-                "opacity": 81,
+                "opacity": 96,
+                "padding": "0",
                 "startingDirectory": "%userprofile%/Downloads",
-                "useAcrylic": false
+                "useAcrylic": true
             },
             {
-                "backgroundImage": "desktopWallpaper",
-                "colorScheme": "One Half Dark",
+                "backgroundImage": "C:\\Users\\MMARZ\\OneDrive\\Pictures\\SlideSHow\\Dark Souls Knight.gif",
+                "backgroundImageOpacity": 0.34,
+                "colorScheme": "Tango Dark",
                 "font": 
                 {
                     "face": "DejaVuSansM Nerd Font Mono"
@@ -269,6 +276,8 @@
                 "hidden": false,
                 "icon": "https://cdn1.iconfinder.com/data/icons/ionicons-sharp-vol-2/512/terminal-sharp-512.png",
                 "name": "Command Prompt",
+                "opacity": 88,
+                "padding": "0",
                 "useAcrylic": true
             },
             {
