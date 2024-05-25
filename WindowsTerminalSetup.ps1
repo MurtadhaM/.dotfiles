@@ -106,6 +106,25 @@ $packages = @(
 }
 
 
+
+
+
+<# INSTALL KUBECTL #>
+
+function INSTALL-KUBECTL(){
+
+# SOURCE https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
+ Write-Host DOWNLOADING KUBECTL USING CHOCO -ForegroundColor Green
+#curl.exe -LO "https://dl.k8s.io/release/v1.30.0/bin/windows/amd64/kubectl.exe"
+choco install kubernetes-cli
+# CONFIGURING COMPLETION
+# SOURCE: https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
+Write-Host CONFIGURING AUTOCOMPLETION -ForegroundColor Green
+kubectl completion powershell >> $PROFILE
+kubectl completion powershell | Out-String | Invoke-Expression
+
+}
+
 <# INSTALL MSYS2 for LINUX-LIKE Experience#>
 function Install-MSYS2(){
     # Download MSYS2 Installer
@@ -240,10 +259,23 @@ function Windows-Settings(){
     # Disable Taskbar News and Interests
     Write-Host "Disabling Taskbar News and Interests" -ForegroundColor Green
     New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Feeds -Name "FlightContent" -Value 0 -PropertyType DWORD -Force
-    
-
 }
-  
+
+
+
+<# Download CONFIG FILES #>
+function Download-Config-FILES(){
+    # Download Windows Terminal Config
+    Write-Host "Downloading Windows Terminal Config" -ForegroundColor Green
+    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MurtadhaM/.dotfiles/Windows/WindowsTerminalConfig.json" -OutFile $HOME\Downloads\WindowsTerminalSettings.json
+    # Download WSL Config
+    Write-Host "Downloading WSL Config" -ForegroundColor Green
+    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MurtadhaM/.dotfiles/Windows/WSL.config" -OutFile $HOME\.wslconfig
+    # Download SSH Config & Keys
+    Write-Host "Downloading SSH Config & Keys" -ForegroundColor Green
+    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/SECRETS/id_rsa" -OutFile $HOME\.ssh\id_rsa 
+    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/SECRETS/id_rsa.pub" -OutFile $HOME\.ssh\id_rsa.pub    
+}
 <# INSTALL ALL#>
 function Install-All(){
     <#Set Execution Policy#> 
@@ -283,3 +315,4 @@ function Install-All(){
 
 
 Install-All
+
