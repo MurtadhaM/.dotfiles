@@ -106,6 +106,24 @@ $packages = @(
 }
 
 
+<# INSTALL PROCS #>
+function INSTALL-PROCS(){
+    # Check if Procs is installed
+    $procs = Get-Command procs -ErrorAction SilentlyContinue
+    if ($procs -eq $null) {
+        Write-Host "Installing Procs" -ForegroundColor Green
+        # Install Procs
+        winget install procs 
+        # CONFIGURING COMPLETION
+        procs --gen-completion-out powershell | Out-String | Invoke-Expression
+        Write-Host "🖊️ Procs Installed 👀 !" -ForegroundColor Green
+    }
+    else{
+        Write-Host "Procs already installed, adding completion" -ForegroundColor Green
+        # CONFIGURING COMPLETION
+        procs --gen-completion-out powershell | Out-String | Invoke-Expression        
+    }
+}
 
 
 
