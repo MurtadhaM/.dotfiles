@@ -247,8 +247,6 @@ function START-UP() {
     Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
     Set-PSReadLineKeyHandler -Key Ctrl+R -Function ReverseSearchHistory
     Set-PSReadLineKeyHandler -Key Ctrl+Shift+R -Function ForwardSearchHistory
-    # IMPORT PROCS COMPLETION
-    procs --gen-completion-out powershell | Out-String | Invoke-Expression
     # BAT OPTIONS
     $ENV:BAT_PAGING="never"
     $ENV:BAT_STYLE="plain"
