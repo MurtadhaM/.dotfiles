@@ -1,83 +1,57 @@
-function install_zsh_plugins(){
-    # ------------------------------------------------------------------------------
-    # Install powerline fonts
+#!/usr/bin/env zsh
+# Script to install oh-my-zsh and related plugins
+
+# Install powerline fonts <Optional>
+#install_powerline_fonts 
+
+# Function to install powerline fonts
+install_powerline_fonts() {
     echo "Installing powerline fonts..."
-    cd "~"
+    cd ~ || exit
     git clone https://github.com/powerline/fonts.git --depth=1
-    cd fonts
+    cd fonts || exit
     ./install.sh
-    #OH MY ZSH SETTINGS
-    # Path to oh-my-zsh installation
-    # ZSH Terminal title
-    DISABLE_AUTO_TITLE=true
-    # installing oh-my-zsh
+    cd ..
+    rm -rf fonts
+
+}
+
+# Function to install oh-my-zsh and related plugins
+install_oh_my_zsh_plugins() {
+    # Install oh-my-zsh
     echo "Installing oh-my-zsh..."
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    # installing powerlevel10k
+    zsh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended"
+
+    # Install powerlevel10k
     echo "Installing powerlevel10k..."
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
+
     # Install zsh-autosuggestions
-    URL="https://github.com/zsh-users/zsh-autosuggestions"
-    DIR="${HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
-    git clone "${URL}" "${DIR}"
-    # ------------------------------------------------------------------------------
+    echo "Installing zsh-autosuggestions..."
+    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+
     # Install zsh-syntax-highlighting
-    URL="https://github.com/zsh-users/zsh-syntax-highlighting.git"
-    DIR="${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
-    git clone "${URL}" "${DIR}"
+    echo "Installing zsh-syntax-highlighting..."
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
     # Install base16-shell
-    URL="https://github.com/chriskempson/base16-shell.git"
-    DIR="${HOME}/.oh-my-zsh/custom/plugins/base16-shell"
-    git clone "${URL}" "${DIR}"
-    # Enable plugins
-    # ------------------------------------------------------------------------------
-    # Update plugins section
-    echo "Updating plugins section..."
+    echo "Installing base16-shell..."
+    git clone https://github.com/chriskempson/base16-shell.git ~/.oh-my-zsh/custom/plugins/base16-shell
 }
 
-function base_enable() {
-
-# Install base16-shell
-URL="https://github.com/chriskempson/base16-shell.git"
-DIR="${HOME}/.oh-my-zsh/custom/plugins/base16-shell"
-git clone "${URL}" "${DIR}"
-# ------------------------------------------------------------------------------
+# Function to enable base16-shell
+enable_base16_shell() {
+    echo "Enabling base16-shell..."
+    source ~/.oh-my-zsh/custom/plugins/base16-shell/scripts/base16-pop.sh
+    echo 'source ~/.oh-my-zsh/custom/plugins/base16-shell/scripts/base16-pop.sh' >> ~/.zshrc
+}
+# Install oh-my-zsh and related plugins
+echo "Installing oh-my-zsh and related plugins..."
+install_oh_my_zsh_plugins
 # Enable base16-shell
-echo "Updating plugins section..."
-source ~/.oh-my-zsh/custom/plugins/base16-shell/scripts/base16-pop.sh
-# ZSH CUSTOM SETTINGS
-echo 'source ~/.oh-my-zsh/custom/plugins/base16-shell/scripts/base16-pop.sh' >> ~/.zshrc
-# ------------------------------------------------------------------------------
+echo "Enabling base16-shell..."
+enable_base16_shell
 
-}
-
-
-# INSTALL ZSH PLUGINS
-install_zsh_plugins
-# ------------------------------------------------------------------------------
-# SETTINGS
-# ------------------------------------------------------------------------------
-# Path to oh-my-zsh installation
-# ZSH Terminal title
-DISABLE_AUTO_TITLE=true
-#------------------------------------------------------------------------------
-# Install oh-my-zsh
-echo "Installing oh-my-zsh..."
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-# ------------------------------------------------------------------------------
-# Base16 Shell
-# ------------------------------------------------------------------------------
-base_enable
-# ------------------------------------------------------------------------------
-# Change the theme and enable base16 theme
-base16_material-vivid
-# ------------------------------------------------------------------------------
-# Set the powerlevel10k theme
-echo "Setting the powerlevel10k theme..."
-echo 'source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc
-# ------------------------------------------------------------------------------
 # Enable plugins
-omz plugin enable git zsh-syntax-highlighting zsh-navigation-tools base16-shell zsh-autosuggestions z fzf tmux tmux-cssh tmuxinator zsh-interactive-cd aliases themes
-
-
-
+echo "Enabling plugins..."
+omz plugin enable git zsh-syntax-highlighting zsh-navigation-tools base16-shell zsh-autosuggestions z fzf tmux tmux-cssh tmuxinator zsh-interactive-cd aliases themes 

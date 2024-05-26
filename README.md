@@ -11,14 +11,16 @@
   - [X] [TMUX Config](####-TMUX-Config-🎨)
   - [X] [Github Copilot CLI](####-Github-Copilot-CLI-🚀)
 
-#### Install Oh My Zsh 🚀
-```bash
-zsh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
+
 #### Plugins 🪙
 ```bash
 zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/oh-my-zsh-plugins.sh)"
 ```
+#### Install Oh My Zsh 🚀
+```bash
+zsh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
 #### Custom ZSH Config 💰
 ```bash
 zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/ZshrcCustomConfig.sh)"
