@@ -199,39 +199,64 @@ function POST-BOOT() {
 
 
 
+<# REMOVE ONEDRIVE FROM PSMODULESPATH#>
+function Remove-OneDrive-Path(){
+    $PSModulePath = [Environment]::GetEnvironmentVariable('PSModulePath', 'Process')
+    $PSModulePath = $PSModulePath -split ';' | Where-Object {$_ -notlike "*OneDrive*"}
+    $PSModulePath = $PSModulePath -join ";"
+    [Environment]::SetEnvironmentVariable('PSModulePath', $PSModulePath, 'User')
+    
+    $PSModulePath = [Environment]::GetEnvironmentVariable('PSModulePath', 'Machine')
+    $PSModulePath = $PSModulePath -split ';' | Where-Object {$_ -notlike "*OneDrive*"}
+    $PSModulePath = $PSModulePath -join ";"
+    
+    $PSModulePath = [Environment]::GetEnvironmentVariable('PSModulePath', 'User')
+    $PSModulePath = $PSModulePath -split ';' | Where-Object {$_ -notlike "*OneDrive*"}
+    $PSModulePath = $PSModulePath -join ";"
+    [Environment]::SetEnvironmentVariable('PSModulePath', $PSModulePath, 'Process')
+    
+}
+
+
+
+
 <# START-UP FUNCTION #>
 function START-UP() {
-Write-Host "Starting Up" -ForegroundColor Green
-oh-my-posh init pwsh --config 'C:\Users\$env:USERNAME\AppData\Local\Programs\oh-my-posh\themes\iterm2.omp.json' | Invoke-Expression
-# Global Variables
-$PSDefaultParameterValues['*:Out-File:Encoding'] = 'utf8'
-$PSDefaultParameterValues['*:Set-Content:Encoding'] = 'utf8'
-$PSDefaultParameterValues['*:Export-Csv:Encoding'] = 'utf8'
-$PSDefaultParameterValues['*:Import-Csv:Encoding'] = 'utf8'
-# Setting Keybinds
-set-PSReadLineKeyHandler -Key Ctrl+a -Function BeginningOfLine
-set-PSReadLineKeyHandler -Key Ctrl+e -Function EndOfLine
-set-PSReadLineKeyHandler -Key Ctrl+k -Function KillLine
-Import-Module CompletionPredictor
-Set-PSReadLineOption -PredictionSource HistoryAndPlugin
-Set-PSReadLineOption -PredictionViewStyle InlineView
-Set-PSReadLineOption -MaximumHistoryCount 10000
-Set-PSReadLineOption -MaximumKillRingCount 10000
-Set-PSReadLineOption -HistoryNoDuplicates 
-Set-PSReadLineOption -HistorySearchCursorMovesToEnd
-# Colorize Predictions
-Set-PSReadLineKeyHandler -Key Tab -Function Complete
-Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
-Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
-Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
-Set-PSReadLineKeyHandler -Key Ctrl+R -Function ReverseSearchHistory
-Set-PSReadLineKeyHandler -Key Ctrl+Shift+R -Function ForwardSearchHistory
-# IMPORT PROCS COMPLETION
-procs --gen-completion-out powershell | Out-String | Invoke-Expression
-# BAT OPTIONS
-$ENV:BAT_PAGING="never"
-$ENV:BAT_STYLE="plain"
-$ENV:BAT_THEME="Solarized (dark)"
-# FZF OPTIONS
-$ENV:FZF_DEFAULT_OPTS="--color=16 --ansi"
-}
+    Write-Host "Starting Up" -ForegroundColor Green
+    oh-my-posh init pwsh --config 'C:\Users\$env:USERNAME\AppData\Local\Programs\oh-my-posh\themes\iterm2.omp.json' | Invoke-Expression
+    # Global Variables
+    $PSDefaultParameterValues['*:Out-File:Encoding'] = 'utf8'
+    $PSDefaultParameterValues['*:Set-Content:Encoding'] = 'utf8'
+    $PSDefaultParameterValues['*:Export-Csv:Encoding'] = 'utf8'
+    $PSDefaultParameterValues['*:Import-Csv:Encoding'] = 'utf8'
+    # Setting Keybinds
+    set-PSReadLineKeyHandler -Key Ctrl+a -Function BeginningOfLine
+    set-PSReadLineKeyHandler -Key Ctrl+e -Function EndOfLine
+    set-PSReadLineKeyHandler -Key Ctrl+k -Function KillLine
+    Import-Module CompletionPredictor
+    Set-PSReadLineOption -PredictionSource HistoryAndPlugin
+    Set-PSReadLineOption -PredictionViewStyle InlineView
+    Set-PSReadLineOption -MaximumHistoryCount 10000
+    Set-PSReadLineOption -MaximumKillRingCount 10000
+    Set-PSReadLineOption -HistoryNoDuplicates 
+    Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+    # Colorize Predictions
+    Set-PSReadLineKeyHandler -Key Tab -Function Complete
+    Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+    Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+    Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+    Set-PSReadLineKeyHandler -Key Ctrl+R -Function ReverseSearchHistory
+    Set-PSReadLineKeyHandler -Key Ctrl+Shift+R -Function ForwardSearchHistory
+    # IMPORT PROCS COMPLETION
+    procs --gen-completion-out powershell | Out-String | Invoke-Expression
+    # BAT OPTIONS
+    $ENV:BAT_PAGING="never"
+    $ENV:BAT_STYLE="plain"
+    $ENV:BAT_THEME="Solarized (dark)"
+    # FZF OPTIONS
+    $ENV:FZF_DEFAULT_OPTS="--color=16 --ansi"
+    # REMOVE ONEDRIVE FROM PSMODULESPATH
+    Remove-OneDrive-Path
+    }
+    
+    
