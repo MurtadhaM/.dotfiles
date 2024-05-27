@@ -293,6 +293,7 @@ function Download-Config-FILES(){
     Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/SECRETS/id_rsa" -OutFile $HOME\.ssh\id_rsa 
     Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/SECRETS/id_rsa.pub" -OutFile $HOME\.ssh\id_rsa.pub    
 }
+
 <# INSTALL ALL#>
 function Install-All(){
     <#Set Execution Policy#> 

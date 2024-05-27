@@ -95,6 +95,21 @@ function Beta_Clear() {
     winget install --name "Google Chrome Beta"
 }
 
+<# tskark & Wireshark #>
+function Wireshark() {
+    # Check if Wireshark is installed
+
+    IF (!(Get-Command -Name tshark -ErrorAction SilentlyContinue) -and !(Test-Path -Path "C:\Program Files\Wireshark\Wireshark.exe" -ErrorAction SilentlyContinue)) {
+        Write-Host "Wireshark is not installed" -ForegroundColor Red
+        Write-Host "Installing Wireshark" -ForegroundColor Green
+        winget install --name "Wireshark"
+    } else {
+        Write-Host "Wireshark is installed! Adding to PATH just in case" -ForegroundColor Green
+        $ENV:PATH += ";C:\Program Files\Wireshark"
+        
+
+    }
+}
 
 function SETUP-AUTOCOMPLETION() {
     # CHECK IF   CompletionPredictor MODULE IS INSTALLED
@@ -215,6 +230,7 @@ function Remove-OneDrive-Path(){
     [Environment]::SetEnvironmentVariable("PSModulePath", $PSModulePath, "Process")
     
 }
+
 
 
 
