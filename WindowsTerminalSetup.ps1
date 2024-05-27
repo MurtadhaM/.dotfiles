@@ -311,13 +311,7 @@ function Install-All(){
     Write-Host "Installing MSYS2" -ForegroundColor Blue
     Install-MSYS2
     <# INSTALL CHROMATERM#>
-    Write-Host "Installing Chromaterm" -ForegroundColor Yellow
-    Install-Chromaterm
-    <# INSTALL WSL2#>
-    Write-Host "Installing WSL2" -ForegroundColor Blue
-    Install-WSL2
-    <# INSTALL WSL2 Distro#>
-    Write-Host "Installing WSL2 Distro" -ForegroundColor Red
+    Write-Host "Installing Chromat1-ForegroundColor Red
     Install-WSL2-Distro
     <# INSTALL NERD FONTS#>
     Write-Host "Installing Nerd Fonts" -ForegroundColor Orange

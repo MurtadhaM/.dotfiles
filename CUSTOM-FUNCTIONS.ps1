@@ -185,8 +185,7 @@ function POST-BOOT() {
     stop-SErvice -displayName "cors*"
     stop-SErvice -displayName "*lg*"
     STOP-SErvice -displayName "*tunne*" -Force
-    # KILLING WSL
-    wsl --shutdown
+
 }
 
 
@@ -223,7 +222,7 @@ function Remove-OneDrive-Path(){
 <# START-UP FUNCTION #>
 function START-UP() {
     Write-Host "Starting Up" -ForegroundColor Green
-    oh-my-posh init pwsh --config "$env:HOMEPATH\AppData\Local\Programs\oh-my-posh\themes\iterm2.omp.json" | Invoke-Expression
+    oh-my-posh init pwsh --config "C:\Users\MMARZ\AppData\Local\Programs\oh-my-posh\themes\tonybaloney.omp.json" |Invoke-Expression
     # Global Variables
     $PSDefaultParameterValues["*:Out-File:Encoding"] = "utf8"
     $PSDefaultParameterValues["*:Set-Content:Encoding"] = "utf8"
