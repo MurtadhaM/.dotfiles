@@ -9,7 +9,7 @@ function Enable-WSL-SYSTEMD{
 $WSL_CONF ="[boot] 
 systemd=true
 "
-wsl --exec bash -c "echo '$WSL_CONF' | sudo tee /etc/wsl.conf"
+wsl --exec bash -c "echo "$WSL_CONF" | sudo tee /etc/wsl.conf"
 # RESTART WSL
 wsl --shutdown
 # RESTART WSL
@@ -23,7 +23,7 @@ Write-Host "Disabling WSL Systemd" -ForegroundColor Green
 $WSL_CONF ="[boot]
 systemd=false
 "
-wsl --exec bash -c "echo '$WSL_CONF' | sudo tee /etc/wsl.conf" 
+wsl --exec bash -c "echo "$WSL_CONF" | sudo tee /etc/wsl.conf" 
 # RESTART WSL
 wsl --shutdown
 # RESTART WSL
@@ -39,7 +39,7 @@ function ENCRYPT-FILE($INPUT_FILE, $OUTPUT) {
     Write-Host $OUTPUT OUTPUT FILE -ForegroundColor RED;
     IF ($INPUT_FILE -eq $null -or $OUTPUT -eq $null -or $INPUT_FILE -eq "" -or $OUTPUT -eq "") {
         Write-Host "Please Provide a File to Encrypt and a File to Save the Encrypted File" -ForegroundColor Red
-        Write-Host "Example: ENCRYPT-FILE -DECRYPTED_FILE 'C:\Users\$env:USERNAME\APPDATA\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt' -ENCRYPTED_FILE 'C:\Users\$env:USERNAME\APPDATA\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt.enc'" -ForegroundColor Yellow
+        Write-Host "Example: ENCRYPT-FILE -DECRYPTED_FILE "$env:HOMEPATH\APPDATA\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt" -ENCRYPTED_FILE "$env:HOMEPATH\APPDATA\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt.enc"" -ForegroundColor Yellow
         return    
     }
     # Check if File Exists
@@ -57,7 +57,7 @@ function ENCRYPT-FILE($INPUT_FILE, $OUTPUT) {
 function DECRYPT-FILE($INPUT_FILE, $OUTPUT) {
     IF ($OUTPUT -eq $null -or $INPUT_FILE -eq $null -or $OUTPUT -eq "" -or $INPUT_FILE -eq "") {
         Write-Host "Please Provide a File to Decrypt and a File to Save the Decrypted File" -ForegroundColor Red
-        Write-Host "Example: DECRYPT-FILE -ENCRYPTED_FILE 'C:\Users\$env:USERNAME\APPDATA\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt.enc' -DECRYPTED_FILE 'C:\Users\$env:USERNAME\APPDATA\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt'" -ForegroundColor Yellow
+        Write-Host "Example: DECRYPT-FILE -ENCRYPTED_FILE "$env:HOMEPATH\APPDATA\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt.enc" -DECRYPTED_FILE "$env:HOMEPATH\APPDATA\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"" -ForegroundColor Yellow
         return    
     }
     # Check if File Exists
@@ -90,8 +90,8 @@ function Delete-Cache() {
 function Beta_Clear() {
     # Remove Google Chrome Beta, Remove Cache, and Reinstall Google Chrome Beta
     winget uninstall --name "Google Chrome Beta" --force --purge;
-    Remove-Item 'C:\Program Files (x86)\Google' -Force -Recurse -ErrorAction Ignore;
-    Remove-Item 'C:\Users\$env:USERNAME\AppData\Local\Google\Chrome Beta' -Force -Recurse -ErrorAction Ignore;
+    Remove-Item "C:\Program Files (x86)\Google" -Force -Recurse -ErrorAction Ignore;
+    Remove-Item "$env:HOMEPATH\AppData\Local\Google\Chrome Beta" -Force -Recurse -ErrorAction Ignore;
     winget install --name "Google Chrome Beta"
 }
 
@@ -104,17 +104,17 @@ function SETUP-AUTOCOMPLETION() {
     }
 
     # Check if the history file below 100 lines
-    IF ((Get-Content C:\Users\$env:USERNAME\APPDATA\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt).Count -lt 100) {
+    IF ((Get-Content $env:HOMEPATH\APPDATA\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt).Count -lt 100) {
         Write-Host "Downloading History File" -ForegroundColor Green
         # Download History File
         $url = "https://raw.githubusercontent.com/MurtadhaM/.dotfiles/Windows/ConsoleHost_history.txt.enc"
-        $ENCRYPTED_FILE = "C:\Users\$env:USERNAME\APPDATA\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt.enc"
-        $DECRYPTED_FILE = "C:\Users\$env:USERNAME\APPDATA\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
+        $ENCRYPTED_FILE = "$env:HOMEPATH\APPDATA\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt.enc"
+        $DECRYPTED_FILE = "$env:HOMEPATH\APPDATA\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
         Invoke-WebRequest -Uri $url -OutFile $ENCRYPTED_FILE
         # Decrypt File
         DECRYPT-FILE $ENCRYPTED_FILE $DECRYPTED_FILE
         # Import File
-        Get-Content $DECRYPTED_FILE | Add-Content C:\Users\$env:USERNAME\APPDATA\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+        Get-Content $DECRYPTED_FILE | Add-Content $env:HOMEPATH\APPDATA\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
         # Remove Temp Files
         Remove-Item -Path $ENCRYPTED_FILE -Force
         Write-Host "History File Downloaded" -ForegroundColor Green
@@ -201,19 +201,19 @@ function POST-BOOT() {
 
 <# REMOVE ONEDRIVE FROM PSMODULESPATH#>
 function Remove-OneDrive-Path(){
-    $PSModulePath = [Environment]::GetEnvironmentVariable('PSModulePath', 'Process')
-    $PSModulePath = $PSModulePath -split ';' | Where-Object {$_ -notlike "*OneDrive*"}
+    $PSModulePath = [Environment]::GetEnvironmentVariable("PSModulePath", "Process")
+    $PSModulePath = $PSModulePath -split ";" | Where-Object {$_ -notlike "*OneDrive*"}
     $PSModulePath = $PSModulePath -join ";"
-    [Environment]::SetEnvironmentVariable('PSModulePath', $PSModulePath, 'User')
+    [Environment]::SetEnvironmentVariable("PSModulePath", $PSModulePath, "User")
     
-    $PSModulePath = [Environment]::GetEnvironmentVariable('PSModulePath', 'Machine')
-    $PSModulePath = $PSModulePath -split ';' | Where-Object {$_ -notlike "*OneDrive*"}
+    $PSModulePath = [Environment]::GetEnvironmentVariable("PSModulePath", "Machine")
+    $PSModulePath = $PSModulePath -split ";" | Where-Object {$_ -notlike "*OneDrive*"}
     $PSModulePath = $PSModulePath -join ";"
     
-    $PSModulePath = [Environment]::GetEnvironmentVariable('PSModulePath', 'User')
-    $PSModulePath = $PSModulePath -split ';' | Where-Object {$_ -notlike "*OneDrive*"}
+    $PSModulePath = [Environment]::GetEnvironmentVariable("PSModulePath", "User")
+    $PSModulePath = $PSModulePath -split ";" | Where-Object {$_ -notlike "*OneDrive*"}
     $PSModulePath = $PSModulePath -join ";"
-    [Environment]::SetEnvironmentVariable('PSModulePath', $PSModulePath, 'Process')
+    [Environment]::SetEnvironmentVariable("PSModulePath", $PSModulePath, "Process")
     
 }
 
@@ -223,12 +223,12 @@ function Remove-OneDrive-Path(){
 <# START-UP FUNCTION #>
 function START-UP() {
     Write-Host "Starting Up" -ForegroundColor Green
-    oh-my-posh init pwsh --config 'C:\Users\$env:USERNAME\AppData\Local\Programs\oh-my-posh\themes\iterm2.omp.json' | Invoke-Expression
+    oh-my-posh init pwsh --config "$env:HOMEPATH\AppData\Local\Programs\oh-my-posh\themes\iterm2.omp.json" | Invoke-Expression
     # Global Variables
-    $PSDefaultParameterValues['*:Out-File:Encoding'] = 'utf8'
-    $PSDefaultParameterValues['*:Set-Content:Encoding'] = 'utf8'
-    $PSDefaultParameterValues['*:Export-Csv:Encoding'] = 'utf8'
-    $PSDefaultParameterValues['*:Import-Csv:Encoding'] = 'utf8'
+    $PSDefaultParameterValues["*:Out-File:Encoding"] = "utf8"
+    $PSDefaultParameterValues["*:Set-Content:Encoding"] = "utf8"
+    $PSDefaultParameterValues["*:Export-Csv:Encoding"] = "utf8"
+    $PSDefaultParameterValues["*:Import-Csv:Encoding"] = "utf8"
     # Setting Keybinds
     set-PSReadLineKeyHandler -Key Ctrl+a -Function BeginningOfLine
     set-PSReadLineKeyHandler -Key Ctrl+e -Function EndOfLine

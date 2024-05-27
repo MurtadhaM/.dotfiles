@@ -221,7 +221,7 @@
         {
             "adjustIndistinguishableColors": "indexed",
             "antialiasingMode": "cleartype",
-            "backgroundImage": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3ABlack_Wallpaper.jpg&psig=AOvVaw0-B4Cc1kJ9ovMv7O9C2R3A&ust=1716348057994000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCLi2x_bknYYDFQAAAAAdAAAAABAJ",
+            "backgroundImage": "https://raw.githubusercontent.com/D3Ext/aesthetic-wallpapers/main/images/retro_live.gif",
             "backgroundImageOpacity": 0.0,
             "colorScheme": "Tango Dark",
             "elevate": false,
@@ -231,20 +231,20 @@
                 "weight": "semi-light"
             },
             "historySize": 90071,
-            "icon": "C:\\Users\\MMARZ\\OneDrive\\Pictures\\Personal\\Terminal.ico",
+            "icon": "https://static-00.iconduck.com/assets.00/terminal-icon-512x465-gwvtu74j.png",
             "intenseTextStyle": "all",
             "opacity": 0,
             "padding": "7",
             "scrollbarState": "visible",
-            "startingDirectory": "C:\\Users\\MMARZ\\Downloads",
-            "tabTitle": "Default",
+            "startingDirectory": "%userprofile%\\Downloads",
+            "tabTitle": "Windows Terminal",
             "useAcrylic": true,
             "useAtlasEngine": true
         },
         "list": 
         [
             {
-                "backgroundImage": "C:\\Users\\MMARZ\\OneDrive\\Pictures\\SlideSHow\\The Fire Keeper.gif",
+                "backgroundImage": "https://raw.githubusercontent.com/D3Ext/aesthetic-wallpapers/main/images/waves_live.gif",
                 "backgroundImageOpacity": 0.21,
                 "backgroundImageStretchMode": "uniformToFill",
                 "colorScheme": "Vintage",
@@ -265,7 +265,7 @@
                 "useAcrylic": true
             },
             {
-                "backgroundImage": "C:\\Users\\MMARZ\\OneDrive\\Pictures\\SlideSHow\\Dark Souls Knight.gif",
+                "backgroundImage": "https://raw.githubusercontent.com/D3Ext/aesthetic-wallpapers/main/images/waves_live.gif",
                 "backgroundImageOpacity": 0.34,
                 "colorScheme": "Tango Dark",
                 "font": 
@@ -281,7 +281,7 @@
                 "useAcrylic": true
             },
             {
-                "backgroundImage": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3ABlack_Wallpaper.jpg&psig=AOvVaw0-B4Cc1kJ9ovMv7O9C2R3A&ust=1716348057994000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCLi2x_bknYYDFQAAAAAdAAAAABAJ",
+                "backgroundImage": "https://raw.githubusercontent.com/D3Ext/aesthetic-wallpapers/main/images/retro2_live.gif",
                 "commandline": "wsl",
                 "guid": "{4ca3f36a-954b-5f17-a131-52dc5790981e}",
                 "hidden": false,
