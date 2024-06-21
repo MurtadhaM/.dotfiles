@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/zsh
 #Script to install oh-my-zsh and related plugins
 
 # Install powerline fonts <Optional>
