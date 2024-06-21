@@ -65,6 +65,7 @@ function Install-Choco-Packages(){
 $packages = @(
     "pwsh"
     "7zip",
+    "openssl",
     "git",
     "google-chrome-x64",
     "wget",
@@ -96,13 +97,14 @@ $packages = @(
     # Install packages
     $total = $packages.Count
     Write-Host Installing $total packages -ForegroundColor Green
-    foreach ($package in $packages) {
-        Write-Host Installing $package $packages ($packages.IndexOf($package) + 1) of $total -ForegroundColor Blue
-        # GLOBAL CONFIRMATION
-        choco feature enable -n allowGlobalConfirmation
-        choco install - $package  -y
-        Write-Host "🖊️ $package Installed 👀 " -ForegroundColor Green
-    }   
+    $packages| ForEach-Object -Parallel  { Write-Host "Installing $_" -ForegroundColor Green; choco install $_ -y } -ThrottleLimit 5
+    # foreach ($package in $packages) {
+    #     Write-Host Installing $package $packages ($packages.IndexOf($package) + 1) of $total -ForegroundColor Blue
+    #     # GLOBAL CONFIRMATION
+    #     choco feature enable -n allowGlobalConfirmation
+    #     choco install - $package  -y
+    #     Write-Host "🖊️ $package Installed 👀 " -ForegroundColor Green
+    # }   
 }
 
 <# INSTALL PROCS #>
@@ -145,7 +147,7 @@ kubectl completion powershell | Out-String | Invoke-Expression
 <# INSTALL MSYS2 for LINUX-LIKE Experience#>
 function Install-MSYS2(){
     # Download MSYS2 Installer
-    Invoke-WebRequest -Uri "https://repo.msys2.org/distrib/msys2-x86_64-latest.exe" -OutFile "msys2-x86_64-latest.exe"
+    curl -L  "https://repo.msys2.org/distrib/msys2-x86_64-latest.exe" -o "msys2-x86_64-latest.exe"
     # Install MSYS2
     .\msys2-x86_64-latest.exe install --root C:\MSYS2 --confirm-command
     # Check if MSYS2 is installed
@@ -228,9 +230,9 @@ function Install-GitHubCLI(){
     # Alias for GitHub CLI
     $GH_COPILOT_PROFILE = Join-Path -Path $(Split-Path -Path $PROFILE -Parent) -ChildPath "gh-copilot.ps1"
     gh copilot alias -- pwsh | Out-File ( New-Item -Path $GH_COPILOT_PROFILE -Force )
-    Write-Host "🖊️ GitHub CLI Extensions Installed 👀 !" -ForegroundColor Green
+    Write-Host "GitHub CLI Extensions Installed 👀 !" -ForegroundColor Green
     . $GH_COPILOT_PROFILE
-    Write-Host "🖊️ GitHub CLI Aliased 👀 !" -ForegroundColor Green
+    Write-Host "GitHub CLI Aliased 👀 !" -ForegroundColor Green
     
 }
 
@@ -264,7 +266,7 @@ function Install-Chromaterm(){
 
 
 <# WINDOWS SETTINGS#>
-function Windows-Settings(){
+function UPDATE-WINDOWS-SETTINGS(){
     # Set Dark Mode
     Write-Host "Setting Dark Mode" -ForegroundColor Green
     New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0 -PropertyType DWORD -Force
@@ -278,24 +280,37 @@ function Windows-Settings(){
     New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Feeds -Name "FlightContent" -Value 0 -PropertyType DWORD -Force
 }
 
+<# COMMAND NOT FOUND INSTALLATION #>
 
+function INSTALL-COMMAND-NOT-FOUND(){
+    # Check if Command-Not-Found is installed
+    INSTALL-MODULE Microsoft.WinGet.CommandNotFound -Force -AllowClobber -Scope CurrentUser
+    # Import Command-Not-Found Module
+    Import-Module Microsoft.WinGet.CommandNotFound
+    
+}
 
 <# Download CONFIG FILES #>
-function Download-Config-FILES(){
+function Get-Config-FILES(){
     # Download Windows Terminal Config
     Write-Host "Downloading Windows Terminal Config" -ForegroundColor Green
-    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MurtadhaM/.dotfiles/Windows/WindowsTerminalConfig.json" -OutFile $HOME\Downloads\WindowsTerminalSettings.json
+    $WINDOWS_TERMINAL_SETTINGS_FILE=$(Get-Item "$ENV:USERPROFILE\AppData\Local\Packages\*Terminal*\LocalState\settings.json" |select -ExpandProperty FullName)
+    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MurtadhaM/.dotfiles/Windows/WindowsTerminalConfig.json" -OutFile $WINDOWS_TERMINAL_SETTINGS_FILE
     # Download WSL Config
     Write-Host "Downloading WSL Config" -ForegroundColor Green
     Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MurtadhaM/.dotfiles/Windows/WSL.config" -OutFile $HOME\.wslconfig
     # Download SSH Config & Keys
     Write-Host "Downloading SSH Config & Keys" -ForegroundColor Green
-    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/SECRETS/id_rsa" -OutFile $HOME\.ssh\id_rsa 
+    # Download SSH Public Key
     Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/SECRETS/id_rsa.pub" -OutFile $HOME\.ssh\id_rsa.pub    
+    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/SECRETS/id_rsa" -OutFile $HOME\.ssh\id_rsa
+    # Decrypt SSH Key
+    Write-Host "Decrypting SSH Key ssh-keygen -p -f $HOME\.ssh\id_rsa" -ForegroundColor Green
+    ssh-keygen -p -f $HOME\.ssh\id_rsa
 }
 
 <# INSTALL ALL#>
-function Install-All(){
+function INSTALL-ALL(){
     <#Set Execution Policy#> 
     Write-Host "Setting Execution Policy" -ForegroundColor Yellow
     Set-ExecutionPolicy Bypass -Scope Process -Force
@@ -312,7 +327,10 @@ function Install-All(){
     Write-Host "Installing MSYS2" -ForegroundColor Blue
     Install-MSYS2
     <# INSTALL CHROMATERM#>
-    Write-Host "Installing Chromat1-ForegroundColor Red
+    Write-Host "Installing Chroma Term" -ForegroundColor Red
+    Install-Chromaterm
+    <# INSTALL WSL DISTRO#>
+    Write-Host "Installing WSL Distro" -ForegroundColor Blue
     Install-WSL2-Distro
     <# INSTALL NERD FONTS#>
     Write-Host "Installing Nerd Fonts" -ForegroundColor Orange
@@ -320,11 +338,19 @@ function Install-All(){
     <# INSTALL SMART TASKBAR#>
     Write-Host "Installing Smart Taskbar" -ForegroundColor Green
     INSTALL-SMART-TASKBAR
-    Write-Host "🖊️ INSTALL CHROMATERM " -ForegroundColor Green
+    Write-Host "INSTALL CHROMATERM" -ForegroundColor Green
     Install-Chromaterm
-} 
+    Write-Host "INSTALL COMMAND-NOT-FOUND" -ForegroundColor Green
+    INSTALL-COMMAND-NOT-FOUND
+    Write-Host "DOWNLOAD CONFIG FILES" -ForegroundColor Green
+    Get-Config-FILES
+    Write-Host "INSTALL GITHUB CLI" -ForegroundColor Green
+    Install-GitHubCLI
+    Write-Host "UPDATE WINDOWS SETTINGS" -ForegroundColor Green
+    UPDATE-WINDOWS-SETTINGS
 
+}
 
-
-Install-All
-
+<# INSTALL ALL#>
+Write-Host "INSTALL ALL" -ForegroundColor Green
+INSTALL-ALL
