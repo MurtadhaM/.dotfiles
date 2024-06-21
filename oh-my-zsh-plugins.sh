@@ -1,8 +1,8 @@
-#!/usr/bin/env zsh
-# Script to install oh-my-zsh and related plugins
+#!/usr/bin/bash
+#Script to install oh-my-zsh and related plugins
 
 # Install powerline fonts <Optional>
-#install_powerline_fonts 
+#install_powerline_fonts
 
 # Function to install powerline fonts
 install_powerline_fonts() {
@@ -54,4 +54,4 @@ enable_base16_shell
 
 # Enable plugins
 echo "Enabling plugins..."
-omz plugin enable git zsh-syntax-highlighting zsh-navigation-tools base16-shell zsh-autosuggestions z fzf tmux tmux-cssh tmuxinator zsh-interactive-cd aliases themes 
+omz plugin enable git zsh-syntax-highlighting zsh-navigation-tools base16-shell zsh-autosuggestions z fzf tmux tmux-cssh tmuxinator  aliases themes
