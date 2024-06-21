@@ -54,5 +54,5 @@ enable_base16_shell
 
 # Enable plugins
 echo "Enabling plugins..."
-source ~/.zshrc
+#source ~/.zshrc
 omz plugin enable git zsh-syntax-highlighting zsh-navigation-tools base16-shell zsh-autosuggestions z fzf tmux tmux-cssh tmuxinator  aliases themes
