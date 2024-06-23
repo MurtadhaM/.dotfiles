@@ -12,7 +12,7 @@ Write-Host "Setting Execution Policy to Bypass" -ForegroundColor Magenta
 Set-ExecutionPolicy Bypass -Scope Process -Force
 # Download and RUN THE AUTOMATION SCRIPT
 Write-Host "Downloading and Running the Windows Terminal Setup Script" -ForegroundColor Green
-Invoke-WebRequest -Uri https://raw.githubusercontent.com/MurtadhaM/.dotfiles/Windows/WindowsTerminalSetup.ps1 -OutFile $HOME\Downloads\WindowsTerminalSetup.ps1"
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/MurtadhaM/.dotfiles/Windows/WindowsTerminalSetup.ps1 -OutFile $HOME\Downloads\WindowsTerminalSetup.ps1
 # Run the Script
 Write-Host "Running the Windows Terminal Setup Script" -ForegroundColor Magenta
 Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File "$HOME\Downloads\WindowsTerminalSetup.ps1"
