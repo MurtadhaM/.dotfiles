@@ -148,10 +148,10 @@ function SETUP-AUTOCOMPLETION() {
     Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
     Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
     Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
-    Set-PSReadLineKeyHandler -Key Ctrl+Space -Function MenuComplete
+    Set-PSReadLineKeyHandler -Key Ctrl+Spacebar -Function MenuComplete
     Set-PSReadLineKeyHandler -Key Ctrl+R -Function ReverseSearchHistory
     Set-PSReadLineKeyHandler -Key Ctrl+Shift+R -Function ForwardSearchHistory
-    Set-PSReadLineKeyHandler -Key Ctrl+Shift+Space -Function MenuComplete
+    Set-PSReadLineKeyHandler -Key Ctrl+Shift+Spacebar -Function MenuComplete
 }
 
 
@@ -187,21 +187,6 @@ function LISTENERS() {
 
 
 
-# POST BOOT SCRIPT
-function POST-BOOT() {
-    # KILLING CORSAIR
-    taskkill.exe /F /IM cors*
-    # KILLING PRINT SERVICE
-    STOP-PRINT-SERVICE
-    # START TIME SERVICE
-    SYNC-TIME
-    SYNC-TIME
-    # STOPING LG, TUNNELBEAR  & Corsair Services
-    stop-SErvice -displayName "cors*"
-    stop-SErvice -displayName "*lg*"
-    STOP-SErvice -displayName "*tunne*" -Force
-
-}
 
 
 
@@ -272,4 +257,11 @@ function START-UP() {
     Remove-OneDrive-Path
     }
     
-    
+  
+# POST BOOT SCRIPT
+function POST-BOOT() {
+    # KILLING ICLOUD DRIVE AND APPLE PRINT SERVICE
+    taskkill /T /F /IM iclou* ;taskkill /F /IM APS*
+    # KILLING PRINT SERVICE
+    STOP-PRINT-SERVICE
+}

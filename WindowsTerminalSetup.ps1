@@ -3,9 +3,9 @@
 function Install-Fonts() {
     cd $HOME\Downloads
     # Download Fonts Installer
-    Invoke-WebRequest -Uri "https://github.com/powerline/fonts/archive/refs/heads/master.zip" -OutFile "fonts.zip"
+    curl -L "https://github.com/powerline/fonts/archive/refs/heads/master.zip" -o "fonts.zip"
     Expand-Archive -Path "fonts.zip" -DestinationPath "fonts"
-    cd fonts
+    cd fonts\fonts-master
     .\install.ps1
 }
 
@@ -58,12 +58,36 @@ function Install-Choco(){
             Write-Host "Choco already installed" -ForegroundColor Green
         }
 
+        # Set Choco Path
+        $env:Path += ";C:\ProgramData\chocolatey\bin"
+        # Enable Global Confirmation
+        choco feature enable -n allowGlobalConfirmation
+
+
 }
+
+<# INSTALL Powershell Core#>
+function Install-Powershell-Core(){
+    # Check if Powershell Core is installed
+    $pwsh = Get-Command pwsh -ErrorAction SilentlyContinue
+    if ($pwsh -eq $null) {
+        Write-Host "Installing Powershell Core" -ForegroundColor Green
+        # Install Powershell Core
+        choco install powershell-core -y
+        Write-Host "🖊️ Powershell Core Installed 👀 !" -ForegroundColor Green
+    }
+    else{
+        Write-Host "Powershell Core already installed" -ForegroundColor Green
+    }
+}
+
 
 function Install-Choco-Packages(){
 
+    
+
 $packages = @(
-    "pwsh"
+    "powershell-core",
     "7zip",
     "openssl",
     "git",
@@ -84,10 +108,9 @@ $packages = @(
     "vscode-insiders",
     "putty",
     "gh",
-    "python",
+    "python312",
 "tftpd32",
 "bat",
-"az.powershell",
 "nerdfont-hack",
 "font-nerd-DejaVuSansMono",
 "nano"
@@ -197,7 +220,7 @@ function Install-WSL2-Distro(){
     if ($wsl_distro -eq $null) {
         Write-Host "Installing WSL2 Distro" -ForegroundColor Green
         # Download and Install Ubuntu 20.04
-        Invoke-WebRequest -Uri "https://aka.ms/wslubuntu2004" -OutFile "Ubuntu2004.appx" -UseBasicParsing
+        wget "https://aka.ms/wslubuntu2004" -OutFile "Ubuntu2004.appx" 
         Add-AppxPackage .\Ubuntu2004.appx
         Write-Host "🖊️ WSL2 Distro Installed 👀 !" -ForegroundColor Green
     }
@@ -251,7 +274,7 @@ function Install-Chromaterm(){
         Write-Host "Python is already installed" -ForegroundColor Green
     }
     # INSTALL CHROMATERM USING PIP
-    python3.12.exe pip install https://github.com/hSaria/ChromaTerm/archive/refs/heads/windows.zip
+    & $HOME\AppData\Local\Programs\Python\Python312\python.exe -m pip install https://github.com/hSaria/ChromaTerm/archive/refs/heads/windows.zip
     Write-host "Warning: CHANGE LINE nano +290 to nano +291 in chromaterm.py" -ForegroundColor Yellow
     # IMPORTANT FIX FOR CHROMATERM
     Write-Host "🖊️ Fixing Chromaterm" -ForegroundColor Green
@@ -284,6 +307,7 @@ function UPDATE-WINDOWS-SETTINGS(){
 
 function INSTALL-COMMAND-NOT-FOUND(){
     # Check if Command-Not-Found is installed
+    Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -Scope CurrentUser
     INSTALL-MODULE Microsoft.WinGet.CommandNotFound -Force -AllowClobber -Scope CurrentUser
     # Import Command-Not-Found Module
     Import-Module Microsoft.WinGet.CommandNotFound
@@ -317,18 +341,19 @@ function INSTALL-ALL(){
     <# INSTALL CHOCO#>
     Write-Host "Installing Choco" -ForegroundColor Red
     Install-Choco
+    <# INSTALL POWERSHELL CORE#>
+    Write-Host "Installing Powershell Core" -ForegroundColor Blue
+    Install-Powershell-Core
     <# INSTALL ALL CHOCO PACKAGES#>
     Write-Host "Installing Choco Packages" -ForegroundColor Green 
-    Install-Choco-Packages
+    #USING POWERSHELL 7.1 RUN     Install-Choco-Packages FOR PARALLEL INSTALLATION
+    & 'C:\Program Files\PowerShell\7\pwsh.exe' -c . $HOME\Downloads\WindowsTerminalSetup.ps1; Install-Choco-Packages
     <# INSTALL WINGET#>
     Write-Host "Installing Winget" -ForegroundColor Blue
     Install-Winget
     <# INSTALL MSYS2#>
     Write-Host "Installing MSYS2" -ForegroundColor Blue
     Install-MSYS2
-    <# INSTALL CHROMATERM#>
-    Write-Host "Installing Chroma Term" -ForegroundColor Red
-    Install-Chromaterm
     <# INSTALL WSL DISTRO#>
     Write-Host "Installing WSL Distro" -ForegroundColor Blue
     Install-WSL2-Distro
@@ -338,8 +363,6 @@ function INSTALL-ALL(){
     <# INSTALL SMART TASKBAR#>
     Write-Host "Installing Smart Taskbar" -ForegroundColor Green
     INSTALL-SMART-TASKBAR
-    Write-Host "INSTALL CHROMATERM" -ForegroundColor Green
-    Install-Chromaterm
     Write-Host "INSTALL COMMAND-NOT-FOUND" -ForegroundColor Green
     INSTALL-COMMAND-NOT-FOUND
     Write-Host "DOWNLOAD CONFIG FILES" -ForegroundColor Green
@@ -348,6 +371,12 @@ function INSTALL-ALL(){
     Install-GitHubCLI
     Write-Host "UPDATE WINDOWS SETTINGS" -ForegroundColor Green
     UPDATE-WINDOWS-SETTINGS
+    Write-Host "Clone Dotfiles" -ForegroundColor Green
+    git clone https://github.com/MurtadhaM/.dotfiles.git $HOME\.dotfiles; cd $HOME\.dotfiles; git checkout Windows
+    Write-Host "Setup setup-AUTOCOMPLETION" -ForegroundColor Green
+    . $HOME\.dotfiles\CUSTOM-FUNCTIONS.ps1; setup-AUTOCOMPLETION
+    
+
 
 }
 
