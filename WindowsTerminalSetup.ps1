@@ -336,8 +336,8 @@ function Get-Config-FILES(){
 <# INSTALL ALL#>
 function INSTALL-ALL(){
     <#Set Execution Policy#> 
-    Write-Host "Setting Execution Policy" -ForegroundColor Yellow
-    Set-ExecutionPolicy Bypass -Scope Process -Force
+    # Write-Host "Setting Execution Policy" -ForegroundColor Yellow
+    # Set-ExecutionPolicy Bypass -Scope Process -Force
     <# INSTALL CHOCO#>
     Write-Host "Installing Choco" -ForegroundColor Red
     Install-Choco
@@ -375,7 +375,7 @@ function INSTALL-ALL(){
     git clone https://github.com/MurtadhaM/.dotfiles.git $HOME\.dotfiles; cd $HOME\.dotfiles; git checkout Windows
     Write-Host "Setup setup-AUTOCOMPLETION" -ForegroundColor Green
     . $HOME\.dotfiles\CUSTOM-FUNCTIONS.ps1; setup-AUTOCOMPLETION
-    
+
 
 
 }
