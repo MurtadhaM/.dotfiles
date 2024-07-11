@@ -73,9 +73,9 @@ function DECRYPT-FILE($INPUT_FILE, $OUTPUT) {
 
 function Delete-Cache() {
     # Remove Temp Files
-    Remove-Item -Path "$HOME\AppData\Local\Temp" -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -Path "$HOME\AppData\Local\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
     # Remove Temp Files
-    Remove-Item -Path "c:\Windows\Temp" -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -Path "c:\Windows\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
     # Clear DNS Cache
     ipconfig /flushdns
     # Clear Recycle Bin
