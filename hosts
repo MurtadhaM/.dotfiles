@@ -1,0 +1,31 @@
+255.255.255.255 WPAD # WinHTTP Web Proxy Auto-Discovery Service (WinHttpAutoProxySvc)
+#192.168.227.164 snake-pc.findasnake.com
+192.168.1.182   mac.findasnake.com
+172.16.50.3     aks.findasnake.com
+172.16.50.2     ESXI.findasnake.com
+#172.16.50.1     FIREWALL.findasnake.com
+172.16.50.3     LINUX.findasnake.com
+172.16.50.4     SWITCH.findasnake.com
+0.0.0.0         blackhole
+127.0.0.1       localhost
+0.0.0.0         bing.com
+0.0.0.0         www.bing.com
+0.0.0.0         paid.outbrain.com
+0.0.0.0         outlookads.live.com
+0.0.0.0         cjs.diagnostics.office.com
+0.0.0.0         logging.diagnostics.office.com
+0.0.0.0         csp.microsoft.com
+0.0.0.0         track.notifications8.creditkarma.com
+0.0.0.0         browser.events.data.microsoft.com
+0.0.0.0         googleads.g.doubleclick.net
+0.0.0.0         self.events.data.microsoft.com
+0.0.0.0         paid.outbrain.com                    # ADDS BLOCKED
+0.0.0.0         googleads.g.doubleclick.net          # ad
+0.0.0.0         logging.diagnostics.office.com        # SPYING MICHEALSOFT
+0.0.0.0         outlookads.live.com                  # SPYING MICHAEL SOFT
+0.0.0.0         track.notifications8.creditkarma.com # SPYING CREDIT KARMA
+0.0.0.0         browser.events.data.microsoft.com    # SPY
+0.0.0.0         cjs.diagnostics.office.com           # SPYING MICHARLSOFT
+0.0.0.0 	wpad.findasnake.com # WINDOWS PROXY DISCOVERY SHIT
+0.0.0.0 	wpad # WINDOWS PROXY DISCOVERY SHIT
+
