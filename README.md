@@ -7,33 +7,30 @@
 - [ ]   Installation Scripts
   - [X] [Oh-My-Zsh](####-Install-Oh-My-Zsh-🚀)
   - [X] [Plugins](####-Plugins-🪙)
-  - [X] [Custom ZSH Config](####-Custom-ZSH-Config-💰)
   - [X] [TMUX Config](####-TMUX-Config-🎨)
-  - [X] [Github Copilot CLI](####-Github-Copilot-CLI-🚀)
+  - [x] [Colorize CLI](###-Colorize-CLI)
 
-
-#### Plugins 🪙
-```bash
-zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/oh-my-zsh-plugins.sh)"
-```
 #### Install Oh My Zsh 🚀
 ```bash
 zsh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-#### Custom ZSH Config 💰
+#### Plugins 🪙
 ```bash
-zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/ZshrcCustomConfig.sh)"
+zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/oh-my-zsh-plugins.sh)"
 ```
+
 #### TMUX Config 🎨
 ```bash
 zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/tmux.sh)"
 ```
-#### Github Copilot CLI 🚀
-```bash
-zsh -c "$(curl -fsSL https://raw.githubusercontent.com/MurtadhaM/.dotfiles/main/COPILOT_CLI.md)"
-```
 ---
+### Colorize CLI
+```bash
+pip install https://raw.githubusercontent.com/MurtadhaM/Infrastructure/main/Administration/Colorize%20CLI/ChromaTerm-Windows-Fixed.zip
+curl -L https://raw.githubusercontent.com/MurtadhaM/Infrastructure/main/Administration/Colorize%20CLI/chromaterm.yml -o ~/.chromaterm.yml
+```
+
 
 - #### Screenshot:
   
