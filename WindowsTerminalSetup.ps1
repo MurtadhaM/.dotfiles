@@ -120,14 +120,14 @@ $packages = @(
     # Install packages
     $total = $packages.Count
     Write-Host Installing $total packages -ForegroundColor Green
-    $packages| ForEach-Object -Parallel  { Write-Host "Installing $_" -ForegroundColor Green; choco install $_ -y } -ThrottleLimit 5
-    # foreach ($package in $packages) {
-    #     Write-Host Installing $package $packages ($packages.IndexOf($package) + 1) of $total -ForegroundColor Blue
-    #     # GLOBAL CONFIRMATION
-    #     choco feature enable -n allowGlobalConfirmation
-    #     choco install - $package  -y
-    #     Write-Host "🖊️ $package Installed 👀 " -ForegroundColor Green
-    # }   
+    # $packages| ForEach-Object -Parallel  { Write-Host "Installing $_" -ForegroundColor Green; choco install $_ -y } -ThrottleLimit 5
+    foreach ($package in $packages) {
+        Write-Host Installing $package $packages ($packages.IndexOf($package) + 1) of $total -ForegroundColor Blue
+        # GLOBAL CONFIRMATION
+        choco feature enable -n allowGlobalConfirmation
+        choco install - $package  -y
+        Write-Host "🖊️ $package Installed 👀 " -ForegroundColor Green
+    }   
 }
 
 <# INSTALL PROCS #>

@@ -217,13 +217,32 @@ function Remove-OneDrive-Path(){
 }
 
 
+<# SETUP BAT#>
 
-
+function Initialize-BatSetup() {
+    # Download Bat
+    curl -L  https://github.com/sharkdp/bat/releases/download/v0.24.0/bat-v0.24.0-x86_64-pc-windows-msvc.zip -OutFile "$env:TEMP\bat.zip"
+    # Unzip Bat
+    Expand-Archive -Path "$env:TEMP\bat.zip" -DestinationPath "$env:TEMP"
+    # Create Bat Directory
+    New-Item -Path "C:\Users\$env:USERNAME\AppData\Local\Programs\bat" -ItemType Directory -Force
+    # Move Bat to 
+    Move-Item -Path "$env:TEMP\bat-v0.24.0-x86_64-pc-windows-msvc\bat.exe" -Destination "C:\Users\$env:USERNAME\AppData\Local\Programs\bat" -Force
+    # Add Bat to PATH
+    $ENV:PATH += ";C:\Users\$env:USERNAME\AppData\Local\Programs\bat"
+    # Remove Temp Files
+    Remove-Item -Path "$env:TEMP\bat.zip" -Force
+    Remove-Item -Path "$env:TEMP\bat-v0.24.0-x86_64-pc-windows-msvc" -Force -Recurse
+    # BAT OPTIONS
+    Write-Output "$env:BAT_PAGING=never" >> $PROFILE
+    Write-Output "$env:BAT_STYLE=plain" >> $PROFILE
+    Write-Output "$env:BAT_THEME='Solarized (dark)'" >> $PROFILE
+}
 
 <# START-UP FUNCTION #>
 function START-UP() {
     Write-Host "Starting Up" -ForegroundColor Green
-    oh-my-posh init pwsh --config "C:\Users\MMARZ\AppData\Local\Programs\oh-my-posh\themes\tonybaloney.omp.json" |Invoke-Expression
+    oh-my-posh init pwsh --config "C:\Users\$ENV:USERNAME\AppData\Local\Programs\oh-my-posh\themes\tonybaloney.omp.json" |Invoke-Expression
     # Global Variables
     $PSDefaultParameterValues["*:Out-File:Encoding"] = "utf8"
     $PSDefaultParameterValues["*:Set-Content:Encoding"] = "utf8"
